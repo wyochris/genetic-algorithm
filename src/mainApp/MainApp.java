@@ -1,6 +1,5 @@
 package mainApp;
 
-
 /**
  * Class: MainApp
  * @author Put your team name here
@@ -8,8 +7,6 @@ package mainApp;
  * <br>Restrictions: None
  */
 public class MainApp {
-	
-	
 	private void runApp() {
 		System.out.println("Write your cool arcade game here!");		
 	} // runApp
@@ -22,5 +19,4 @@ public class MainApp {
 		MainApp mainApp = new MainApp();
 		mainApp.runApp();		
 	} // main
-
 }
