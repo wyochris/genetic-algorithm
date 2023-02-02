@@ -1,5 +1,7 @@
 package mainApp;
 
+import java.util.Random;
+
 /**
  * Class: MainApp
  * @author Put your team name here
@@ -8,7 +10,11 @@ package mainApp;
  */
 public class MainApp {
 	private void runApp() {
-		System.out.println("Write your cool arcade game here!");		
+		System.out.println("Write your cool arcade game here!");
+		Random rand = new Random();
+		System.out.println(rand.ints(0, 100).findFirst().getAsInt());
+		MainViewer mainV = new MainViewer();
+		
 	} // runApp
 
 	/**
