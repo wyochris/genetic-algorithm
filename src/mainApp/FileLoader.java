@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
+
 
 public class FileLoader {
 	Color background = new Color(30,33,36);
@@ -27,6 +29,7 @@ public class FileLoader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 		
 	}
 
@@ -35,11 +38,12 @@ public class FileLoader {
 		// if something is not MAX_SIZE or MIN_SIZE catch
 		FileReader file = new FileReader(filename);
 		Scanner s = new Scanner(file);
+		String cString = s.nextLine();
 		int i = 0;
 		ArrayList<Integer> chromosome = new ArrayList<Integer>();
-		while(s.hasNextInt()) {
+		String[] cString = cString.spl
+		for( ) {
 			chromosome.set(i, s.nextInt());
-			i++;
 		}
 		return chromosome;
 	}

@@ -51,6 +51,7 @@ public class MainViewer {
 		controlPanel.add(chrome);
 		
 		chrome.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FileLoader chromeFile = new FileLoader();

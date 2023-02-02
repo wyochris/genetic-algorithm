@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileSystemView;
 
 public class FileLoaderViewer{
-	Color background;
+	Color background = new Color (30,33,36);
 
 	public FileLoaderViewer(Color background) {
 		this.background = background;
@@ -29,24 +29,19 @@ public class FileLoaderViewer{
 		frame.setLocation(frameXLoc, frameYLoc);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(this.background);	
-		
-		
-	    final JLabel directoryLabel = new JLabel(" ");
-	    directoryLabel.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 36));
-	    frame.add(directoryLabel, BorderLayout.NORTH);
-
-	    final JLabel filenameLabel = new JLabel(" ");
-	    filenameLabel.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 36));
-	    frame.add(filenameLabel, BorderLayout.SOUTH);
 
 	    JFileChooser fileChooser = new JFileChooser();
 	    fileChooser.setControlButtonsAreShown(true);
+	    fileChooser.setFileView(null);
+//	    String filename = fileChooser.getSelectedFile().getAbsolutePath();
+	   
 	    frame.add(fileChooser, BorderLayout.CENTER);
 	    	    
 	    frame.pack();
 		frame.setVisible(true);
+		return "twenty.txt";
 		
-		return "string";
+//		return filename;
 	}
 	
 
