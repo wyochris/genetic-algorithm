@@ -72,11 +72,9 @@ public class ChromosomeViewer extends JComponent {
 		});
 		
 		JPanel chromePanel = new JPanel();
-		Graphics2D g2 = (Graphics2D) g2;
 		
 		for(int i = 0; i < this.chromosome.getChromeSize(); i++) {
-			Rectangle2D gene = new Rectangle2D.Double(20, 20, 20, 20);
-			g2.draw(gene);
+			Rectangle2D gene = new Rectangle2D.Double(20 + i *20, 20, 20, 20);
 			
 		}
 		
