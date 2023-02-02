@@ -1,3 +1,7 @@
+/* At Milestone 1 - 
+ * Acts as the Event Control. All functionality is operated by the MainApp, and implemented through further associated classes.
+ *
+ */
 package mainApp;
 
 import java.util.Random;

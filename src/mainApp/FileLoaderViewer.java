@@ -1,3 +1,8 @@
+/* At Milestone 1 - 
+ * Responsible for Viewing File Loader
+ *
+ */
+
 package mainApp;
 
 import java.awt.BorderLayout;
