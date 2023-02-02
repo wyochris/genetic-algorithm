@@ -14,7 +14,6 @@ public class MainApp {
 		Random rand = new Random();
 		System.out.println(rand.ints(0, 100).findFirst().getAsInt());
 		MainViewer mainV = new MainViewer();
-		
 	} // runApp
 
 	/**

@@ -43,6 +43,11 @@ public class FileLoaderViewer{
 		
 //		return filename;
 	}
+
+	public String init() {
+		// TODO Auto-generated method stub
+		return "twenty.txt";
+	}
 	
 
 }

@@ -55,8 +55,10 @@ public class MainViewer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FileLoader chromeFile = new FileLoader();
-				ArrayList<Integer> chromeBits = chromeFile.loadFile();
+				ArrayList<Integer> chromeBits = chromeFile.init();
 				Chromosome newChrome = new Chromosome(chromeBits);
+				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome, frame);
+				
 			}
 		});
 	

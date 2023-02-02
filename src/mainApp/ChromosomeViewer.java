@@ -1,6 +1,7 @@
 package mainApp;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,28 +10,39 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ChromosomeViewer {
+	private Color background = new Color (30,33,36);
+	private Chromosome chromosome;
 
-	public void cViewerDriver() {
+	public ChromosomeViewer(Chromosome newChrome, JFrame frame) {
+		// TODO Auto-generated constructor stub
+		cViewerDriver(newChrome, frame);
+	}
+
+	public void cViewerDriver(Chromosome newChrome, JFrame frame) {
 		// TODO Auto-generated method stub
+		this.chromosome = newChrome;
 		
-		final String frameTitle = "Vehicle Drawing Graphics Question";
-		final int frameWidth = 1000;
-		final int frameHeight = 600;
+		frame.removeAll();
+		frame.dispose();
+		
+		JFrame cViewer = new JFrame();
+		
+		final String frameTitle = "Chromosome Viewer";
 		final int frameXLoc = 100;
 		final int frameYLoc = 200;
 		
-		JFrame frame = new JFrame();
-		frame.setTitle(frameTitle);
-		frame.setSize(frameWidth, frameHeight);
-		frame.setLocation(frameXLoc, frameYLoc);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cViewer.setTitle(frameTitle);
+		cViewer.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//		frame.setLocation(frameXLoc, frameYLoc);
+		cViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cViewer.getContentPane().setBackground(this.background);	
 		
 		JPanel controlPanel = new JPanel();
 		
-		JButton moveForward = new JButton("Move Forward");
-		controlPanel.add(moveForward);
+		JButton mutate = new JButton("Mutate");
+		controlPanel.add(mutate);
 		
-		moveForward.addActionListener(new ActionListener() {
+		mutate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -56,9 +68,13 @@ public class ChromosomeViewer {
 			}
 		});
 		
+		JPanel chromePanel = new JPanel();
 		
-		frame.add(controlPanel, BorderLayout.NORTH );
-		frame.setVisible(true);
+
+		
+		
+		cViewer.add(controlPanel, BorderLayout.NORTH );
+		cViewer.setVisible(true);
 	}
 
 }
