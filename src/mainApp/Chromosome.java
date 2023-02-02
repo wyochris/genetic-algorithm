@@ -24,5 +24,9 @@ public class Chromosome {
 			}
 		}
 	}
+	
+	public int getChromeSize() {
+		return bits.size();
+	}
 
 }

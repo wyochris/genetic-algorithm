@@ -2,14 +2,17 @@ package mainApp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class ChromosomeViewer {
+public class ChromosomeViewer extends JComponent {
 	private Color background = new Color (30,33,36);
 	private Chromosome chromosome;
 
@@ -69,9 +72,13 @@ public class ChromosomeViewer {
 		});
 		
 		JPanel chromePanel = new JPanel();
+		Graphics2D g2 = (Graphics2D) g2;
 		
-
-		
+		for(int i = 0; i < this.chromosome.getChromeSize(); i++) {
+			Rectangle2D gene = new Rectangle2D.Double(20, 20, 20, 20);
+			g2.draw(gene);
+			
+		}
 		
 		cViewer.add(controlPanel, BorderLayout.NORTH );
 		cViewer.setVisible(true);
