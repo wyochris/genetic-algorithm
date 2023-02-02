@@ -19,12 +19,18 @@ public class FileLoader {
 	
 	public ArrayList<Integer> loadFile() {
 		this.viewer = new FileLoaderViewer(background);
-		this.fileName = this.viewer.returnFile();
-		return fileToArray(this.fileName);
+		try {
+			this.fileName = this.viewer.returnFile();
+			return fileToArray(this.fileName);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
-	private ArrayList<Integer> fileToArray(String filename){
+	private ArrayList<Integer> fileToArray(String filename) throws FileNotFoundException{
 		// TODO make file to array
 		// if something is not MAX_SIZE or MIN_SIZE catch
 		FileReader file = new FileReader(filename);
