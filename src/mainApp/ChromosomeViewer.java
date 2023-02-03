@@ -1,4 +1,10 @@
-package mainApp;
+/* At Milestone 1 - 
+
+ * Class ChromsomeViewer displays a Chromosome. It is the GUI for a Chromosome i.e it is responsible for creeating a JFrame 
+ * and relevant components.
+ * 
+ * Respresents visually as a grid of colored squares for 1/0 bits green/black for 1/0 respectively
+ */
 
 import java.awt.BorderLayout;
 import java.awt.Color;

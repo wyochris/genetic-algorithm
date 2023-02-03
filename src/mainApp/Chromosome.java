@@ -1,5 +1,9 @@
-package mainApp;
+/* At Milestone 1 - 
+ * Class Chromsome creates a Chromosome with a list of bits i.e 0s & 1s
+ *Chromsome is also responsible for causing mutation, using a parameter Chance, which guides the mutation 
+ */
 
+package mainApp;
 import java.util.ArrayList;
 import java.util.Random;
 

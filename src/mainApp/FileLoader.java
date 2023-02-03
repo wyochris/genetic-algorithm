@@ -1,3 +1,9 @@
+/* At Milestone 1 - 
+ * FileLoader loads the two example chromosomes. It is also responsible for catching a custom exception 
+ * for incorrect file and other IOExceptions 
+ *
+ */
+
 package mainApp;
 
 import java.awt.Color;
