@@ -1,3 +1,5 @@
+package mainApp;
+
 /* At Milestone 1 - 
 
  * Class ChromsomeViewer displays a Chromosome. It is the GUI for a Chromosome i.e it is responsible for creeating a JFrame 
@@ -18,18 +20,21 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class ChromosomeViewer extends JComponent {
 	private Color background = new Color (30,33,36);
-	private Chromosome chromosome;
 
 	public ChromosomeViewer(Chromosome newChrome, JFrame frame) {
 		// TODO Auto-generated constructor stub
 		cViewerDriver(newChrome, frame);
 	}
 
+	public ChromosomeViewer(JFrame frame) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void cViewerDriver(Chromosome newChrome, JFrame frame) {
 		// TODO Auto-generated method stub
-		this.chromosome = newChrome;
 		
 		frame.removeAll();
 		frame.dispose();
@@ -41,8 +46,9 @@ public class ChromosomeViewer extends JComponent {
 		final int frameYLoc = 200;
 		
 		cViewer.setTitle(frameTitle);
-		cViewer.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-//		frame.setLocation(frameXLoc, frameYLoc);
+//		cViewer.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setLocation(frameXLoc, frameYLoc);
+		frame.setSize(400, 400);
 		cViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		cViewer.getContentPane().setBackground(this.background);	
 		
@@ -52,9 +58,11 @@ public class ChromosomeViewer extends JComponent {
 		controlPanel.add(mutate);
 		
 		mutate.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				newChrome.mutate((double) 10);
+				System.out.println("mutated!");
 			}
 		});
 		
@@ -79,11 +87,12 @@ public class ChromosomeViewer extends JComponent {
 		
 		JPanel chromePanel = new JPanel();
 		
-		for(int i = 0; i < this.chromosome.getChromeSize(); i++) {
-			Rectangle2D gene = new Rectangle2D.Double(20 + i *20, 20, 20, 20);
-			
+		for(int i = 0; i < newChrome.getChromeSize(); i++) {
+			JButton gene = new JButton();
+			chromePanel.add(gene);
 		}
 		
+		cViewer.add(chromePanel);
 		cViewer.add(controlPanel, BorderLayout.NORTH );
 		cViewer.setVisible(true);
 	}

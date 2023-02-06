@@ -24,7 +24,7 @@ public class FileLoaderViewer{
 		this.background = background;
 	}
 	
-	public String returnFile() throws FileNotFoundException {
+	public File returnFile() throws FileNotFoundException {
 		JFrame frame = new JFrame();
 		
 		final int frameXLoc = 100;
@@ -38,20 +38,19 @@ public class FileLoaderViewer{
 	    JFileChooser fileChooser = new JFileChooser();
 	    fileChooser.setControlButtonsAreShown(true);
 	    fileChooser.setFileView(null);
-//	    String filename = fileChooser.getSelectedFile().getAbsolutePath();
+	    File file = fileChooser.getSelectedFile();
 	   
 	    frame.add(fileChooser, BorderLayout.CENTER);
 	    	    
 	    frame.pack();
 		frame.setVisible(true);
-		return "twenty.txt";
-		
-//		return filename;
+		return file;
 	}
 
-	public String init() {
+	public File init() {
 		// TODO Auto-generated method stub
-		return "twenty.txt";
+		File file = new File("twenty.txt");
+		return file;
 	}
 	
 

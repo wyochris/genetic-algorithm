@@ -38,7 +38,9 @@ public class MainViewer {
 		
 		JFrame frame = new JFrame();
 		frame.setTitle(frameTitle);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+//		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setLocation(frameXLoc, frameYLoc);
+		frame.setSize(400, 400);
 		frame.setLocation(frameXLoc, frameYLoc);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(this.background);	
@@ -57,7 +59,9 @@ public class MainViewer {
 				FileLoader chromeFile = new FileLoader();
 				ArrayList<Integer> chromeBits = chromeFile.init();
 				Chromosome newChrome = new Chromosome(chromeBits);
-				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome, frame);
+//				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome, frame);
+				ChromosomeViewer cViewer = new ChromosomeViewer(frame);
+
 				
 			}
 		});
