@@ -30,14 +30,14 @@ public class Chromosome {
 				else {
 					bits.set(i, 1);
 				}
-				System.out.print(bits.get(i));
 			}
+			System.out.print(bits.get(i));
 		}
-		System.out.println("ee");
+		System.out.println("");
 	}
 	
 	public int getChromeSize() {
-		System.out.println("hello " + bits.size());
+//		System.out.println("hello " + bits.size());
 		return bits.size();
 	}
 }

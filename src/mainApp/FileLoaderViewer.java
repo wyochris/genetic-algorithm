@@ -49,8 +49,7 @@ public class FileLoaderViewer{
 
 	public File init() {
 		// TODO Auto-generated method stub
-		File file = new File("twenty.txt");
-		return file;
+		return new File("twenty.txt");
 	}
 	
 

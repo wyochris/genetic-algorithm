@@ -62,12 +62,10 @@ public class ChromosomeViewer extends JComponent {
 		ArrayList<JButton> geneButtons = new ArrayList<JButton>();
 		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
 			geneButtons.add(new JButton("hi"));
-			geneButtons.get(i).add(chromePanel);
 		}
+		setButtons(cViewer, geneButtons, chromePanel);
 		cViewer.add(chromePanel);
 		
-		setButtons(cViewer, geneButtons, chromePanel);
-
 		JPanel controlPanel = new JPanel();
 		
 		JButton mutate = new JButton("Mutate");
@@ -101,26 +99,24 @@ public class ChromosomeViewer extends JComponent {
 		
 			}
 		});
+		
+		cViewer.add(controlPanel, BorderLayout.SOUTH );
+		cViewer.pack();
 		cViewer.setVisible(true);
-
-		cViewer.add(controlPanel, BorderLayout.NORTH );
 	}
 	
 	public void setButtons(JFrame cViewer, ArrayList<JButton> geneButtons, JPanel chromePanel) {
-		
 		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
-			JButton gene = new JButton();
-			geneButtons.set(i, gene);
-			gene.setText("" + this.chrome.bits.get(i));
+			geneButtons.set(i, geneButtons.get(i));
+			geneButtons.get(i).setText("" + this.chrome.bits.get(i));
 			if(this.chrome.bits.get(i) == 1) {
-					gene.setBackground(Color.GREEN);
+				geneButtons.get(i).setBackground(Color.GREEN);
 			}
 			else {
-				gene.setBackground(Color.WHITE);
+				geneButtons.get(i).setBackground(Color.WHITE);
 			}
+			chromePanel.add(geneButtons.get(i));
 		}
-		cViewer.add(chromePanel);
-
 	}
 
 }

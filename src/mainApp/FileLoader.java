@@ -37,18 +37,19 @@ public class FileLoader {
 		return null;
 	}
 
-	public ArrayList<Integer> loadFile() {
-		try {
-			this.file = this.viewer.returnFile();
-			return fileToArray(this.file);
+//	public ArrayList<Integer> loadFile() {
+//		try {
+//			this.file = this.viewer.returnFile();
+//			return fileToArray(this.file);
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
+	
 	private ArrayList<Integer> fileToArray(File file) throws FileNotFoundException{
 		// TODO make file to array
 		// if something is not MAX_SIZE or MIN_SIZE catch
