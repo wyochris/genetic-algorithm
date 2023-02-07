@@ -1,3 +1,10 @@
+/* At Milestone 1 - 
+ *Acts as a viewer for the MainApp
+ *
+ *
+ *
+ */
+
 package mainApp;
 
 import java.awt.BorderLayout;

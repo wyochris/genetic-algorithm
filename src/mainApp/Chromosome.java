@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Chromosome {
-	private ArrayList<Integer> bits;
+	ArrayList<Integer> bits;
 	private Random rand;
 
 	public Chromosome(ArrayList<Integer> chromeBits) {
@@ -16,6 +16,9 @@ public class Chromosome {
 		this.bits = chromeBits;
 	}
 	
+	public Chromosome() {
+	}
+
 	public void mutate(Double chance) {
 		for(int i = 0; i < bits.size(); i++) {
 			if(rand.ints(0, bits.size()).findFirst().getAsInt() <= chance) {
