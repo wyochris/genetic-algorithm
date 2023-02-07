@@ -40,4 +40,15 @@ public class Chromosome {
 //		System.out.println("hello " + bits.size());
 		return bits.size();
 	}
+	
+	public Chromosome copyAndMutate(chance)
+	{
+		Chromosome copy = new Chromosome();
+		for(int i =0;i<=this.bits.size();i++)
+		{
+			copy.bits.add(this.bits.get(i));
+		}
+		copy.mutate(chance);
+		return copy;
+	}
 }
