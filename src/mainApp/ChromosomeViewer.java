@@ -1,3 +1,5 @@
+package mainApp;
+
 /* At Milestone 1 - 
 
  * Class ChromsomeViewer displays a Chromosome. It is the GUI for a Chromosome i.e it is responsible for creeating a JFrame 
@@ -7,39 +9,77 @@
  */
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class ChromosomeViewer {
+@SuppressWarnings("serial")
+public class ChromosomeViewer extends JComponent {
+	private Color background = new Color (30,33,36);
+	private Chromosome chrome;
 
-	public void cViewerDriver() {
+	public ChromosomeViewer(Chromosome newChrome, JFrame frame) {
+		// TODO Auto-generated constructor stub
+		cViewerDriver(newChrome, frame);
+	}
+
+//	public ChromosomeViewer(JFrame frame) {
+//		// TODO Auto-generated constructor stub
+//		Chromosome newChrome = new Chromosome(chromeBits);
+//		cViewerDriver(newChrome, frame);
+//	}
+
+	public void cViewerDriver(Chromosome newChrome, JFrame frame) {
 		// TODO Auto-generated method stub
+		this.chrome = newChrome;
+	
+//		frame.removeAll();
+		frame.dispose();
 		
-		final String frameTitle = "Vehicle Drawing Graphics Question";
-		final int frameWidth = 1000;
-		final int frameHeight = 600;
+		JFrame cViewer = new JFrame();
+
+		final String frameTitle = "Chromosome Viewer";
 		final int frameXLoc = 100;
 		final int frameYLoc = 200;
 		
-		JFrame frame = new JFrame();
-		frame.setTitle(frameTitle);
-		frame.setSize(frameWidth, frameHeight);
-		frame.setLocation(frameXLoc, frameYLoc);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cViewer.setTitle(frameTitle);
+//		cViewer.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setSize(800, 600);
+		cViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
+		
+		JPanel chromePanel = new JPanel();
+		ArrayList<JButton> geneButtons = new ArrayList<JButton>();
+		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
+			geneButtons.add(new JButton("hi"));
+			geneButtons.get(i).add(chromePanel);
+		}
+		cViewer.add(chromePanel);
+		
+		setButtons(cViewer, geneButtons, chromePanel);
+
 		JPanel controlPanel = new JPanel();
 		
-		JButton moveForward = new JButton("Move Forward");
-		controlPanel.add(moveForward);
+		JButton mutate = new JButton("Mutate");
+		controlPanel.add(mutate);
 		
-		moveForward.addActionListener(new ActionListener() {
+		mutate.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				newChrome.mutate((double) 10);
+				setButtons(cViewer, geneButtons, chromePanel);
+				System.out.println("mutated!");
 			}
 		});
 		
@@ -61,10 +101,26 @@ public class ChromosomeViewer {
 		
 			}
 		});
+		cViewer.setVisible(true);
+
+		cViewer.add(controlPanel, BorderLayout.NORTH );
+	}
+	
+	public void setButtons(JFrame cViewer, ArrayList<JButton> geneButtons, JPanel chromePanel) {
 		
-		
-		frame.add(controlPanel, BorderLayout.NORTH );
-		frame.setVisible(true);
+		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
+			JButton gene = new JButton();
+			geneButtons.set(i, gene);
+			gene.setText("" + this.chrome.bits.get(i));
+			if(this.chrome.bits.get(i) == 1) {
+					gene.setBackground(Color.GREEN);
+			}
+			else {
+				gene.setBackground(Color.WHITE);
+			}
+		}
+		cViewer.add(chromePanel);
+
 	}
 
 }

@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Chromosome {
-	ArrayList<Integer> bits;
-	private Random rand;
+
+	public ArrayList<Integer> bits;
+	private	Random rand = new Random();
+
 
 	public Chromosome(ArrayList<Integer> chromeBits) {
 		// TODO Auto-generated constructor stub
@@ -28,8 +30,14 @@ public class Chromosome {
 				else {
 					bits.set(i, 1);
 				}
+				System.out.print(bits.get(i));
 			}
 		}
+		System.out.println("ee");
 	}
-
+	
+	public int getChromeSize() {
+		System.out.println("hello " + bits.size());
+		return bits.size();
+	}
 }
