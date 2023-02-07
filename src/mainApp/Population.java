@@ -8,12 +8,27 @@ public class Population
 	Chromosome[] thisGen = new Chromosome[100];
 	int[] ones = new int[100];
 	Chromosome[] nextGen;
-	
-	
-	
-	public int generateRanxdom()
+
+	public int generateRandom()
 	{
-		 	
+		 Random rnd = new Random();
+		 rnd.setSeed(0);
+		 
+		 for(int j =0;j<100;j++)
+		 {
+			 int arr[] = new int[100]
+						
+					 
+			for(int i =0;i<100;i++)
+			{
+				if(rnd.nextBoolean())
+					arr[i] = 1;
+				else
+					arr[i]=0;
+			}
+			Chromosome a = new Chromosome(arr);
+			thisGen[j]=a;
+		 } 
 	}
 	
 	
@@ -70,7 +85,7 @@ public class Population
 		//Passing top 50
 		for(int i =0;i<50;i++)
 		{
-			nextGen[i] = thisGe n[i].mutate(chance);
+			nextGen[i] = thisGen[i].mutate(chance);
 			nextGen[i+50] = thisGen[i].copyAndMutate(chance);
 		}
 	}
