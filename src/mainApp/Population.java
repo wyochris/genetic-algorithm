@@ -93,7 +93,7 @@ public class Population
 	public void evoLoop(int generation)
 	{
 		generateRandom();
-		for(int i =1;i<=generation,i++)
+		for(int i =1;i<=generation;i++)
 		{
 			nextGen = new Chromosome[100];
 			evoLoopHelper(chance);
