@@ -4,8 +4,6 @@
  */
 package mainApp;
 
-import java.util.Random;
-
 /**
  * Class: MainApp
  * @author Put your team name here

@@ -59,8 +59,8 @@ public class MainViewer {
 				FileLoader chromeFile = new FileLoader();
 				ArrayList<Integer> chromeBits = chromeFile.init();
 				Chromosome newChrome = new Chromosome(chromeBits);
-//				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome, frame);
-				ChromosomeViewer cViewer = new ChromosomeViewer(frame);
+				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome, frame);
+//				ChromosomeViewer cViewer = new ChromosomeViewer(frame);
 
 				
 			}

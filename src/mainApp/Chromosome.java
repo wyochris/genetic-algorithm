@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Chromosome {
-	private ArrayList<Integer> bits;
+	public ArrayList<Integer> bits;
 	private	Random rand = new Random();
 
 	public Chromosome(ArrayList<Integer> chromeBits) {

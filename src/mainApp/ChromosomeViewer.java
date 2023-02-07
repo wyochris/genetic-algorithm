@@ -14,6 +14,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -23,35 +25,49 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class ChromosomeViewer extends JComponent {
 	private Color background = new Color (30,33,36);
+	private Chromosome chrome;
 
 	public ChromosomeViewer(Chromosome newChrome, JFrame frame) {
 		// TODO Auto-generated constructor stub
 		cViewerDriver(newChrome, frame);
 	}
 
-	public ChromosomeViewer(JFrame frame) {
-		// TODO Auto-generated constructor stub
-	}
+//	public ChromosomeViewer(JFrame frame) {
+//		// TODO Auto-generated constructor stub
+//		Chromosome newChrome = new Chromosome(chromeBits);
+//		cViewerDriver(newChrome, frame);
+//	}
 
 	public void cViewerDriver(Chromosome newChrome, JFrame frame) {
 		// TODO Auto-generated method stub
-		
-		frame.removeAll();
+		this.chrome = newChrome;
+	
+//		frame.removeAll();
 		frame.dispose();
 		
 		JFrame cViewer = new JFrame();
-		
+
 		final String frameTitle = "Chromosome Viewer";
 		final int frameXLoc = 100;
 		final int frameYLoc = 200;
 		
 		cViewer.setTitle(frameTitle);
 //		cViewer.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setLocation(frameXLoc, frameYLoc);
-		frame.setSize(400, 400);
+		frame.setSize(800, 600);
 		cViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		cViewer.getContentPane().setBackground(this.background);	
 		
+		
+		
+		JPanel chromePanel = new JPanel();
+		ArrayList<JButton> geneButtons = new ArrayList<JButton>();
+		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
+			geneButtons.add(new JButton("hi"));
+			geneButtons.get(i).add(chromePanel);
+		}
+		cViewer.add(chromePanel);
+		
+		setButtons(cViewer, geneButtons, chromePanel);
+
 		JPanel controlPanel = new JPanel();
 		
 		JButton mutate = new JButton("Mutate");
@@ -62,6 +78,7 @@ public class ChromosomeViewer extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				newChrome.mutate((double) 10);
+				setButtons(cViewer, geneButtons, chromePanel);
 				System.out.println("mutated!");
 			}
 		});
@@ -84,17 +101,26 @@ public class ChromosomeViewer extends JComponent {
 		
 			}
 		});
-		
-		JPanel chromePanel = new JPanel();
-		
-		for(int i = 0; i < newChrome.getChromeSize(); i++) {
-			JButton gene = new JButton();
-			chromePanel.add(gene);
-		}
-		
-		cViewer.add(chromePanel);
-		cViewer.add(controlPanel, BorderLayout.NORTH );
 		cViewer.setVisible(true);
+
+		cViewer.add(controlPanel, BorderLayout.NORTH );
+	}
+	
+	public void setButtons(JFrame cViewer, ArrayList<JButton> geneButtons, JPanel chromePanel) {
+		
+		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
+			JButton gene = new JButton();
+			geneButtons.set(i, gene);
+			gene.setText("" + this.chrome.bits.get(i));
+			if(this.chrome.bits.get(i) == 1) {
+					gene.setBackground(Color.GREEN);
+			}
+			else {
+				gene.setBackground(Color.WHITE);
+			}
+		}
+		cViewer.add(chromePanel);
+
 	}
 
 }
