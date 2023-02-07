@@ -7,10 +7,15 @@ public class Population
 {
 	Chromosome[] thisGen = new Chromosome[100];
 	int[] ones = new int[100];
-	Chromosome[] nextGen = new Chromosome[100];
+	Chromosome[] nextGen;
 	
-	Random rnd = new Random();
-	rnd.setSeed(seed);
+	
+	
+	public int generateRanxdom()
+	{
+		 	
+	}
+	
 	
 	public int fitFunc(Chromosome c)
 	{
@@ -58,29 +63,29 @@ public class Population
 		}
 	}
 	
-	public void evoLoopHelper()
+	public void evoLoopHelper(int chance)
 	{
 		createOne();
 		bubbleSort();
 		//Passing top 50
 		for(int i =0;i<50;i++)
 		{
-			nextGen[i] = thisGen[i];
-			Chromosome temp = new Chromosome();
-			temp=thisGen[i];
-			temp.mutate(chance); //As Dr. Yoder what should chance be
-			nextGen[i+50] = temp;
+			nextGen[i] = thisGe n[i].mutate(chance);
+			nextGen[i+50] = thisGen[i].copyAndMutate(chance);
 		}
 	}
 	
 	public void evoLoop(int generation)
 	{
+		generateRandom();
 		for(int i =1;i<=generation,i++)
 		{
-			evoLoopHelper();
-			
+			nextGen = new Chromosome[100];
+			evoLoopHelper(chance);
+			for(int j =0;i<100;i++)
+			{
+				thisGen[j]=nextGen[j];
+			}
 		}
-		
-		
 	}
 }
