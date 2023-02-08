@@ -118,5 +118,4 @@ public class ChromosomeViewer extends JComponent {
 			chromePanel.add(geneButtons.get(i));
 		}
 	}
-
 }
