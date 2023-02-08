@@ -41,7 +41,7 @@ public class Chromosome {
 		return bits.size();
 	}
 	
-	public Chromosome copyAndMutate(chance)
+	public Chromosome copyAndMutate(Double chance)
 	{
 		Chromosome copy = new Chromosome();
 		for(int i =0;i<=this.bits.size();i++)
