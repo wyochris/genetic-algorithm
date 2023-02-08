@@ -9,22 +9,20 @@ public class Population
 	int[] ones = new int[100];
 	Chromosome[] nextGen;
 
-	public int generateRandom()
+	public void generateRandom()
 	{
 		 Random rnd = new Random();
 		 rnd.setSeed(0);
 		 
 		 for(int j =0;j<100;j++)
 		 {
-			 int arr[] = new int[100]
-						
-					 
+			 ArrayList<Integer> arr = new ArrayList<Integer>();		 
 			for(int i =0;i<100;i++)
 			{
 				if(rnd.nextBoolean())
-					arr[i] = 1;
+					arr.add(1);
 				else
-					arr[i]=0;
+					arr.add(0);
 			}
 			Chromosome a = new Chromosome(arr);
 			thisGen[j]=a;
