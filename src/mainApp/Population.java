@@ -76,7 +76,7 @@ public class Population
 		}
 	}
 	
-	public void evoLoopHelper(int chance)
+	public void evoLoopHelper(double chance)
 	{
 		createOne();
 		bubbleSort();
