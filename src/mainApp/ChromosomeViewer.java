@@ -38,6 +38,8 @@ public class ChromosomeViewer extends JComponent {
 //		cViewerDriver(newChrome, frame);
 //	}
 
+	/* This method creates the GUI for viewing a chromosome*/
+	
 	public void cViewerDriver(Chromosome newChrome, JFrame frame) {
 		// TODO Auto-generated method stub
 		this.chrome = newChrome;
@@ -105,6 +107,7 @@ public class ChromosomeViewer extends JComponent {
 		cViewer.setVisible(true);
 	}
 	
+	// This method creates the gene buttons 
 	public void setButtons(JFrame cViewer, ArrayList<JButton> geneButtons, JPanel chromePanel) {
 		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
 			geneButtons.set(i, geneButtons.get(i));
