@@ -106,16 +106,23 @@ public class ChromosomeViewer extends JComponent {
 	}
 	
 	public void setButtons(JFrame cViewer, ArrayList<JButton> geneButtons, JPanel chromePanel) {
-		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
-			geneButtons.set(i, geneButtons.get(i));
-			geneButtons.get(i).setText("" + this.chrome.bits.get(i));
-			if(this.chrome.bits.get(i) == 1) {
-				geneButtons.get(i).setBackground(Color.GREEN);
-			}
-			else {
-				geneButtons.get(i).setBackground(Color.WHITE);
-			}
+		for(int i = 0; i < this.chrome.getChromeSize() / 10; i++) {
+			for(int j = 0; j < 9; i++) {
+				if( geneButtons.get(i) != null) {
+					geneButtons.set(i, geneButtons.get(i));
+					geneButtons.get(i).setText("" + this.chrome.bits.get(i));
+					if(this.chrome.bits.get(i) == 1) {
+						geneButtons.get(i).setBackground(Color.GREEN);
+					}
+					else {
+						geneButtons.get(i).setBackground(Color.WHITE);
+					}
+				}
+				else {
+					continue;
+				}
 			chromePanel.add(geneButtons.get(i));
+			}
 		}
 	}
 }
