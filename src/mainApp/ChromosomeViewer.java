@@ -10,16 +10,20 @@ package mainApp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -58,17 +62,75 @@ public class ChromosomeViewer extends JComponent {
 		frame.setSize(800, 600);
 		cViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		int chromeNum = this.chrome.getChromeSize();
+		int numRows = 0;
+		int lastRow = 0;
+		numRows = (chromeNum / 10) + 1;
+		lastRow = (chromeNum % 10);
 		
-		
-		JPanel chromePanel = new JPanel();
-		ArrayList<JButton> geneButtons = new ArrayList<JButton>();
-		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
-			geneButtons.add(new JButton("hi"));
-		}
-		setButtons(cViewer, geneButtons, chromePanel);
-		cViewer.add(chromePanel);
+		GridLayout grid = new GridLayout(numRows, 10, 3, 3);
+		JPanel chromeP = new JPanel(grid);
 		
 		JPanel controlPanel = new JPanel();
+		
+		ArrayList<JButton> geneButtons = new ArrayList<JButton>();
+
+		
+		ActionListener listener = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            if (e.getSource() instanceof JButton) {
+	            	if(((AbstractButton) e.getSource()).getText() == "1"){
+	            		((JButton) e.getSource()).setText("" + 0);
+	            		((JButton) e.getSource()).setBackground(Color.WHITE);
+	            	}
+	            	else {
+	            		((JButton) e.getSource()).setText("" + 1);
+	            		((JButton) e.getSource()).setBackground(Color.GREEN);
+	            	}
+	            }
+	        }
+	    };
+				
+		for(int i = 0; i < this.chrome.getChromeSize(); i++) {
+			String str = new String();
+			if(this.chrome.bits.get(i) == 1) {
+				str = "1";
+			}
+			else {
+				str = "0";
+			}
+			geneButtons.add(new JButton(str));
+			geneButtons.get(i).addActionListener(listener);
+			
+			if(this.chrome.bits.get(i) == 1) {
+				geneButtons.get(i).setBackground(Color.GREEN);
+			}
+			else {
+				geneButtons.get(i).setBackground(Color.WHITE);
+			}
+			
+//			geneButtons.get(i).addActionListener(new CActionListener() {
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					if(newChrome.bits.get(i) == 1) {
+//						newChrome.bits.set(i, 0);
+//						geneButtons.get(i).setText("0" + 0);
+//						geneButtons.get(i).setBackground(Color.WHITE);
+//					}
+//					else {
+//						newChrome.bits.set(i, 0);
+//						geneButtons.get(i).setText("0" + 0);
+//						geneButtons.get(i).setBackground(Color.WHITE);
+//					}
+//				}
+//				
+//			});
+		}
+		
+		
+		
+		setButtons(cViewer, geneButtons, chromeP, chromeNum);
 		
 		JButton mutate = new JButton("Mutate");
 		controlPanel.add(mutate);
@@ -78,7 +140,7 @@ public class ChromosomeViewer extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				newChrome.mutate((double) 10);
-				setButtons(cViewer, geneButtons, chromePanel);
+				setButtons(cViewer, geneButtons, chromeP, chromeNum);
 				System.out.println("mutated!");
 			}
 		});
@@ -108,24 +170,27 @@ public class ChromosomeViewer extends JComponent {
 	}
 	
 	// This method creates the gene buttons 
-	public void setButtons(JFrame cViewer, ArrayList<JButton> geneButtons, JPanel chromePanel) {
-		for(int i = 0; i < this.chrome.getChromeSize() / 10; i++) {
-			for(int j = 0; j < 9; i++) {
-				if( geneButtons.get(i) != null) {
-					geneButtons.set(i, geneButtons.get(i));
-					geneButtons.get(i).setText("" + this.chrome.bits.get(i));
-					if(this.chrome.bits.get(i) == 1) {
-						geneButtons.get(i).setBackground(Color.GREEN);
-					}
-					else {
-						geneButtons.get(i).setBackground(Color.WHITE);
-					}
+	public void setButtons(JFrame cViewer, ArrayList<JButton> geneButtons,
+			 JPanel chromeP, int chromeNum) {
+
+
+		for(int i = 0; i < chromeNum; i++) {
+			if( geneButtons.get(i) != null) {
+				geneButtons.set(i, geneButtons.get(i));
+				geneButtons.get(i).setText("" + this.chrome.bits.get(i));
+				if(this.chrome.bits.get(i) == 1) {
+					geneButtons.get(i).setBackground(Color.GREEN);
+					chromeP.add(geneButtons.get(i));	
 				}
 				else {
-					continue;
+					geneButtons.get(i).setBackground(Color.WHITE);
+					chromeP.add(geneButtons.get(i));
 				}
-			chromePanel.add(geneButtons.get(i));
+			}
+			else {
+				continue;
 			}
 		}
-	}
+		cViewer.add(chromeP);
+}
 }
