@@ -109,26 +109,7 @@ public class ChromosomeViewer extends JComponent {
 			else {
 				geneButtons.get(i).setBackground(Color.WHITE);
 			}
-			
-//			geneButtons.get(i).addActionListener(new CActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					if(newChrome.bits.get(i) == 1) {
-//						newChrome.bits.set(i, 0);
-//						geneButtons.get(i).setText("0" + 0);
-//						geneButtons.get(i).setBackground(Color.WHITE);
-//					}
-//					else {
-//						newChrome.bits.set(i, 0);
-//						geneButtons.get(i).setText("0" + 0);
-//						geneButtons.get(i).setBackground(Color.WHITE);
-//					}
-//				}
-//				
-//			});
 		}
-		
-		
 		
 		setButtons(cViewer, geneButtons, chromeP, chromeNum);
 		
