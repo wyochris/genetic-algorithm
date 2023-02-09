@@ -83,12 +83,13 @@ public class Population
 		//Passing top 50
 		for(int i =0;i<50;i++)
 		{
-			nextGen[i] = thisGen[i].mutate(chance);
+			thisGen[i].mutate(chance);
+			nextGen[i] = thisGen[i];
 			nextGen[i+50] = thisGen[i].copyAndMutate(chance);
 		}
 	}
 	
-	public void evoLoop(int generation)
+	public void evoLoop(double chance, int generation)
 	{
 		generateRandom();
 		for(int i =1;i<=generation;i++)

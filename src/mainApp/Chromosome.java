@@ -21,6 +21,7 @@ public class Chromosome {
 	public Chromosome() {
 	}
 
+	// This method mutates the chromosome i.e flips 0s and 1s depedning on a user input mutation rate Double Chance
 	public void mutate(Double chance) {
 		for(int i = 0; i < bits.size(); i++) {
 			if(rand.ints(0, bits.size()).findFirst().getAsInt() <= chance) {
@@ -36,11 +37,13 @@ public class Chromosome {
 		System.out.println("");
 	}
 	
+	//Return the number of bits i.e 0s and 1s in the Chromosome
 	public int getChromeSize() {
 //		System.out.println("hello " + bits.size());
 		return bits.size();
 	}
 	
+	// THis method is used in the evolutionary loop to create deep copies for the next generations
 	public Chromosome copyAndMutate(Double chance)
 	{
 		Chromosome copy = new Chromosome();
