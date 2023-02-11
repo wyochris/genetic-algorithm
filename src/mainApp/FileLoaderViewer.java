@@ -51,6 +51,4 @@ public class FileLoaderViewer{
 		// TODO Auto-generated method stub
 		return new File("twenty.txt");
 	}
-	
-
 }

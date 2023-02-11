@@ -3,12 +3,25 @@ package mainApp;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Purpose: Population class is intended to hold the entire population of chromosomes, and
+ * 			hold instances of generations for organizational purposes. 
+ * Functions: Population also sorts populations according to fitness, and generates new 
+ * 			  generations
+ *  
+ * @author lardnece
+ *
+ */
 public class Population
 {
 	Chromosome[] thisGen = new Chromosome[100];
 	int[] ones = new int[100];
 	Chromosome[] nextGen;
 
+	/**
+	 * ensures: thisGen List of Chromosomes creates a new random generation of size 100
+	 * 
+	 */
 	public void generateRandom()
 	{
 		 Random rnd = new Random();
@@ -29,7 +42,12 @@ public class Population
 		 } 
 	}
 	
-	
+	/**
+	 * ensures: the number of 1's in a chromosome's alleles is counted
+	 * @param Chromosome c to be evaluated
+	 * @return count, the number of 1's
+	 * 
+	 */
 	public int fitFunc(Chromosome c)
 	{
 	
@@ -42,6 +60,11 @@ public class Population
 		return count;
 	}
 	
+	/**
+	 * ensures: (not sure) this function ensures that a separate list called ones 
+	 * 			holds the fitness count of the chromosomes
+	 * 
+	 */
 	public void createOne()
 	{
 		for(int i =0;i<thisGen.length;i++)
@@ -50,6 +73,15 @@ public class Population
 		}
 	}
 	
+	/**
+	 * 
+	 * ensures: the chromosome is sorted??
+	 * 
+	 * I have no idea what is going on in this function, specifically 
+	 * lines 87 - 89 
+	 * 		- Chris (Reviewer0
+	 * 
+	 */
 	public void bubbleSort()
 	{
 		Chromosome temp;
@@ -76,6 +108,11 @@ public class Population
 		}
 	}
 	
+	/**
+	 * 
+	 * ensures: the top 50 is mutated in passed into the nextGeneration
+	 * @param chance, passed in by GUI or default 1
+	 */
 	public void evoLoopHelper(double chance)
 	{
 		createOne();
@@ -89,6 +126,12 @@ public class Population
 		}
 	}
 	
+	/**
+	 * ensures: a new generation of 100 chromosomes is created and generated randomly
+	 * 			and then sorted and mutated
+	 * @param chance
+	 * @param generation
+	 */
 	public void evoLoop(double chance, int generation)
 	{
 		generateRandom();
