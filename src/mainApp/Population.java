@@ -19,7 +19,7 @@ public class Population
 	Chromosome[] nextGen;
 
 	/**
-	 * ensures: thisGen List of Chromosomes creates a new random generation of size 100
+	 * ensures: thisGen Lis t of Chromosomes creates a new random generation of size 100
 	 * 
 	 */
 	public void generateRandom()
