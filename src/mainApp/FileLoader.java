@@ -22,7 +22,6 @@ public class FileLoader {
 	
 	public FileLoader() {
 		// TODO Auto-generated constructor stub
-		init();
 	}
 	
 	public ArrayList<Integer> init() {
@@ -34,6 +33,10 @@ public class FileLoader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	public ArrayList<Integer> returnBits() {
 		return null;
 	}
 

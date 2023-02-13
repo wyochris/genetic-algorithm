@@ -31,9 +31,9 @@ public class ChromosomeViewer extends JComponent {
 	private Color background = new Color (30,33,36);
 	private Chromosome chrome;
 
-	public ChromosomeViewer(Chromosome newChrome, JFrame frame) {
+	public ChromosomeViewer(Chromosome newChrome) {
 		// TODO Auto-generated constructor stub
-		cViewerDriver(newChrome, frame);
+		cViewerDriver(newChrome);
 	}
 
 //	public ChromosomeViewer(JFrame frame) {
@@ -44,12 +44,9 @@ public class ChromosomeViewer extends JComponent {
 
 	/* This method creates the GUI for viewing a chromosome*/
 	
-	public void cViewerDriver(Chromosome newChrome, JFrame frame) {
+	public void cViewerDriver(Chromosome newChrome) {
 		// TODO Auto-generated method stub
 		this.chrome = newChrome;
-	
-//		frame.removeAll();
-		frame.dispose();
 		
 		JFrame cViewer = new JFrame();
 
@@ -59,7 +56,7 @@ public class ChromosomeViewer extends JComponent {
 		
 		cViewer.setTitle(frameTitle);
 //		cViewer.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setSize(800, 600);
+		cViewer.setSize(800, 600);
 		cViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		int chromeNum = this.chrome.getChromeSize();
@@ -126,19 +123,19 @@ public class ChromosomeViewer extends JComponent {
 			}
 		});
 		
-		JButton turnLeft = new JButton("Turn Left");
-		controlPanel.add(turnLeft);
+		JButton loadFile = new JButton("Load file");
+		controlPanel.add(loadFile);
 		
-		turnLeft.addActionListener(new ActionListener() {
+		loadFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
-		JButton turnRight = new JButton("Turn Right");
-		controlPanel.add(turnRight);
+		JButton saveFile = new JButton("Save file");
+		controlPanel.add(saveFile);
 		
-		turnRight.addActionListener(new ActionListener() {
+		saveFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 		
