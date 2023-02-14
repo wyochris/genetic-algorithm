@@ -86,4 +86,11 @@ public class PopulationViewerComponent extends JComponent {
 			g2.fillRect(SIDE_OFFSET + i*LINE_WIDTH, yPos, LINE_WIDTH, yPos + worstPer );
 		}	
 	}
+	
+	public void start(int numGen, int popSize, int mRate) {
+		
+	}
+	public void update() {
+		
+	}
 }

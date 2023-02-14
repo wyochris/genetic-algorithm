@@ -35,7 +35,6 @@ public class Population {
 					arr.add(0);
 			}
 			Chromosome a = new Chromosome(arr);
-			thisGen[j]=a;
 		 } 
 	}
 	

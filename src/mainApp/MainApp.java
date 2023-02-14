@@ -4,13 +4,22 @@
  */
 package mainApp;
 
+import java.awt.Graphics2D;
+
+import javax.swing.JComponent;
+
 /**
  * Class: MainApp
  * @author Put your team name here
  * <br>Purpose: Top level class for CSSE220 Project containing main method 
  * <br>Restrictions: None
  */
-public class MainApp {
+public class MainApp extends JComponent {
+
+	public MainApp() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private void runApp() {
 		System.out.println("Write your cool arcade game here!");
 		MainViewer mainV = new MainViewer();
