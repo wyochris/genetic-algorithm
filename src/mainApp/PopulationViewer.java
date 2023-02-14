@@ -111,7 +111,8 @@ public class PopulationViewer extends JComponent {
 					popComp.start(Integer.parseInt(numGen.getText()), 
 							Integer.parseInt(numPop.getText()), Double.parseDouble(mutateRate.getText()));
 					
-					start.setText("Stop");				}
+					start.setText("Stop");
+				}
 				else {
 					t.stop();
 					start.setText("Start");

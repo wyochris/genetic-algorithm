@@ -45,9 +45,7 @@ public class PopulationViewerComponent extends JComponent {
 		//Fill region for data to be shown
 		g2.fillRect(SIDE_OFFSET, 0, this.getWidth()-SIDE_OFFSET, this.getHeight() );
 		
-		//Don't try to draw unless there is data to be drawn
 		if ( bestFit.size() > 0) {
-			//Use color constants so that they line up with the color of the Person categories.
 			g2.setColor(Color.GREEN);
 			g2.drawString("Best Fitness:" + bestFit.get(bestFit.size()-1 ), SIDE_OFFSET/10, STATS_HEIGHT/4 );
 			
@@ -72,8 +70,7 @@ public class PopulationViewerComponent extends JComponent {
 			//offset slightly to get lines to show up
 			int yPos = 1;
 			
-			//we use the defined colors from Person class
-			//Draw from the top down
+
 			g2.setColor(Color.GREEN);
 			g2.fillRect(SIDE_OFFSET + i*LINE_WIDTH, yPos, LINE_WIDTH, yPos + bestPer );
 			yPos += bestPer;
@@ -92,8 +89,9 @@ public class PopulationViewerComponent extends JComponent {
 		Population pop = new Population();
 		pop.generateRandom(popSize, numGen);
 		
+		
 	}
-	public void update(Generation currentGen) {
+	public void updateGen(Generation currentGen) {
 		calculateBestFit(currentGen);
 		calculateAvgFit(currentGen);
 		calculateWorstFit(currentGen);
@@ -110,6 +108,11 @@ public class PopulationViewerComponent extends JComponent {
 	}
 
 	private void calculateBestFit(Generation currentGen) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}
