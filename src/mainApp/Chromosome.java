@@ -37,7 +37,7 @@ public class Chromosome {
 		System.out.println("");
 	}
 	
-	//Return the number of bits i.e 0s and 1s in the Chromosome
+	//Return the number of bit s i.e 0s and 1s in the Chromosome
 	public int getChromeSize() {
 //		System.out.println("hello " + bits.size());
 		return bits.size();
