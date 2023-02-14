@@ -12,9 +12,8 @@ import java.util.Random;
  * @author lardnece
  *
  */
-public class Population
-{
-	Chromosome[] thisGen = new Chromosome[100];
+public class Population {
+	ArrayList<Chromosome> thisGen = new ArrayList<Chromosome>();
 	int[] ones = new int[100];
 	Chromosome[] nextGen;
 
@@ -22,16 +21,14 @@ public class Population
 	 * ensures: thisGen Lis t of Chromosomes creates a new random generation of size 100
 	 * 
 	 */
-	public void generateRandom()
-	{
+	public void generateRandom() {
+		
 		 Random rnd = new Random();
 		 rnd.setSeed(0);
 		 
-		 for(int j =0;j<100;j++)
-		 {
+		 for(int j =0;j<100;j++) {
 			 ArrayList<Integer> arr = new ArrayList<Integer>();		 
-			for(int i =0;i<100;i++)
-			{
+			for(int i =0;i<100;i++) {
 				if(rnd.nextBoolean())
 					arr.add(1);
 				else
@@ -48,12 +45,10 @@ public class Population
 	 * @return count, the number of 1's
 	 * 
 	 */
-	public int fitFunc(Chromosome c)
-	{
+	public int fitFunc(Chromosome c) {
 	
 		int count = 0;
-		for(int i =0;i<c.bits.size();i++)
-		{
+		for(int i =0;i<c.bits.size();i++) {
 			if(c.bits.get(i)==1)
 				count++;
 		}
@@ -65,35 +60,27 @@ public class Population
 	 * 			holds the fitness count of the chromosomes
 	 * 
 	 */
-	public void createOne()
-	{
-		for(int i =0;i<thisGen.length;i++)
-		{
+	public void createOne() {
+		for(int i =0;i<thisGen.length;i++) {
 			ones[i] = fitFunc(thisGen[i]);
 		}
 	}
 	
 	/**
-	 * 
 	 * ensures: the chromosome is sorted??
 	 * 
 	 * I have no idea what is going on in this function, specifically 
 	 * lines 87 - 89 
-	 * 		- Chris (Reviewer0
-	 * 
+	 * 		- Chris (Reviewer)
 	 */
-	public void bubbleSort()
-	{
+	public void bubbleSort() {
 		Chromosome temp;
 		int tempInt;
 		boolean isSorted=false;
-		while(!isSorted)
-		{
+		while(!isSorted) {
 			isSorted=true;
-			for(int i =0;i<ones.length-1;i++)
-			{
-				if(ones[i]>ones[i+1])
-				{
+			for(int i =0;i<ones.length-1;i++) {
+				if(ones[i]>ones[i+1]) {
 					tempInt = ones[i];
 					ones[i]=ones[i+1];
 					ones[i+1]=tempInt;
@@ -109,17 +96,14 @@ public class Population
 	}
 	
 	/**
-	 * 
 	 * ensures: the top 50 is mutated in passed into the nextGeneration
 	 * @param chance, passed in by GUI or default 1
 	 */
-	public void evoLoopHelper(double chance)
-	{
+	public void evoLoopHelper(double chance) {
 		createOne();
 		bubbleSort();
 		//Passing top 50
-		for(int i =0;i<50;i++)
-		{
+		for(int i =0;i<50;i++) {
 			thisGen[i].mutate(chance);
 			nextGen[i] = thisGen[i];
 			nextGen[i+50] = thisGen[i].copyAndMutate(chance);
@@ -132,17 +116,15 @@ public class Population
 	 * @param chance
 	 * @param generation
 	 */
-	public void evoLoop(double chance, int generation)
-	{
+	public void evoLoop(double chance, int generation) {
 		generateRandom();
-		for(int i =1;i<=generation;i++)
-		{
+		for(int i =1;i<=generation;i++) {
 			nextGen = new Chromosome[100];
 			evoLoopHelper(chance);
-			for(int j =0;i<100;i++)
-			{
+			for(int j =0;i<100;i++){
 				thisGen[j]=nextGen[j];
 			}
 		}
 	}
+	
 }

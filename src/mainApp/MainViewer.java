@@ -57,7 +57,7 @@ public class MainViewer {
 		controlPanel.add(panelTitle,BorderLayout.NORTH);
 		
 		JButton chrome = new JButton("Chromosome Viewer");
-		controlPanel.add(chrome);
+		controlPanel.add(chrome, BorderLayout.NORTH);
 		
 		chrome.addActionListener(new ActionListener() {
 
@@ -66,13 +66,25 @@ public class MainViewer {
 				FileLoader chromeFile = new FileLoader();
 				ArrayList<Integer> chromeBits = chromeFile.init();
 				Chromosome newChrome = new Chromosome(chromeBits);
-				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome, frame);
+				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome);
 //				ChromosomeViewer cViewer = new ChromosomeViewer(frame);
 
 				
 			}
 		});
+		
+		JButton pop = new JButton("Population Viewer");
+		controlPanel.add(pop, BorderLayout.SOUTH);
+		
+		pop.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PopulationViewer pViewer = new PopulationViewer();
+			}
+		});
 	
+//		frame.pack();
 		frame.add(controlPanel, BorderLayout.NORTH );
 		frame.setVisible(true);
 		

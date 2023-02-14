@@ -24,7 +24,7 @@ public class Chromosome {
 	// This method mutates the chromosome i.e flips 0s and 1s depedning on a user input mutation rate Double Chance
 	public void mutate(Double chance) {
 		for(int i = 0; i < bits.size(); i++) {
-			if(rand.ints(0, bits.size()).findFirst().getAsInt() <= chance) {
+			if(rand.ints(0, bits.size()).findFirst().getAsInt() <= chance / bits.size()) {
 				if(bits.get(i) == 1) {
 					bits.set(i, 0);
 				}
