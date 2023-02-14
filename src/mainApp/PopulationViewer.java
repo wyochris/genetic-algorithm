@@ -17,10 +17,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
-
-import sim.PandemicStatsComponent;
-import sim.SimulationComponent;
 
 /**
  * Though nothing is here yet, this class is supposed to show the population and 
@@ -28,9 +26,9 @@ import sim.SimulationComponent;
  * @author lardnece
  *
  */
-public class PopulationViewer {
+public class PopulationViewer extends JComponent {
 	
-	final int frameXLoc = 1000;
+	final int frameXLoc = 500;
 	final int frameYLoc = 500;
 	
 	public PopulationViewer() {
@@ -41,8 +39,7 @@ public class PopulationViewer {
 		
 		//Create a component for watching simulations
 		PopulationViewerComponent popComp = new PopulationViewerComponent();
-		frame.add(popComp, BorderLayout.CENTER);
-		
+		frame.add(popComp, BorderLayout.NORTH);
 		//create a panel for buttons
 		JPanel buttonPanel = new JPanel();
 		//Set up the panel to use a vertical layout and give it a background color
@@ -52,14 +49,14 @@ public class PopulationViewer {
 		//create panel to add dropdown and label to
 		JPanel dropdownPanel  = new JPanel();
 		dropdownPanel.setBackground( Color.WHITE );
-		JLabel dropdownLabel = new JLabel("Select number to add: ");
+		JLabel dropdownLabel = new JLabel("Selection: ");
 		dropdownPanel.add(dropdownLabel);
 		buttonPanel.add(dropdownPanel);
 		
 		//Modify this if you wish to add different numbers of things into the simulation
-		Integer[] numbersForDropdown = {1, 10, 100};
+		String[] numbersForDropdown = {"Truncation"};
 		// create a combo box with the fixed array so you can pick how many things to add
-		JComboBox<Integer> addNumberSelector = new JComboBox<Integer>(numbersForDropdown);
+		JComboBox<String> addNumberSelector = new JComboBox<String>(numbersForDropdown);
 		//set its maximum size to be its preferred size so it doesn't get too big
 		addNumberSelector.setMaximumSize( addNumberSelector.getPreferredSize() );
 		addNumberSelector.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -67,29 +64,39 @@ public class PopulationViewer {
 		dropdownPanel.add( addNumberSelector );
 		dropdownPanel.setMaximumSize( dropdownPanel.getPreferredSize() );
 		
-		//Button for adding Particles to a simulation
-		JButton addParticles = new JButton("Add Particles");
-		addParticles.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//passes in the number from the dropdown list
-
-			} });
-		buttonPanel.add( addParticles );
+		JLabel mutuateRateText = new JLabel("Mutation rate: ");
+		buttonPanel.add(mutuateRateText);
+		JTextField mutateRate = new JTextField("1.0");
+//		numGen.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				//passes in the number from the dropdown list
+//				
+//			} });
+		buttonPanel.add( mutateRate );
 		
-		//Button for adding TagPlayers to simulation (includes 1 "it" player)
-		JButton addTagPlayers = new JButton("Add TagPlayers");
-		addTagPlayers.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//passes in the number from the dropdown list
+		//Button for adding Particles to a simulation
+		JLabel numGenText = new JLabel("Generations: ");
+		buttonPanel.add(numGenText);
+		JTextField numGen = new JTextField("100");
+//		numGen.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				//passes in the number from the dropdown list
+//				
+//			} });
+		buttonPanel.add( numGen );
+		
+		JLabel numPopText = new JLabel("Population: ");
+		buttonPanel.add(numPopText);
+		JTextField numPop = new JTextField("100");
+		buttonPanel.add( numPop );
 
-			} });
-		buttonPanel.add( addTagPlayers );
 		
 		Timer t = new Timer(50, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				popComp.update();
 				popComp.repaint();
 				frame.repaint();
 			}
@@ -101,6 +108,9 @@ public class PopulationViewer {
 			public void actionPerformed(ActionEvent e) {
 				if(start.getText() == "Start") {
 					t.start();
+					popComp.start(Integer.parseInt(numGen.getText()), 
+							Integer.parseInt(numPop.getText()), Double.parseDouble(mutateRate.getText()));
+					
 					start.setText("Stop");				}
 				else {
 					t.stop();

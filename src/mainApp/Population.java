@@ -13,32 +13,39 @@ import java.util.Random;
  *
  */
 public class Population {
-	ArrayList<Chromosome> thisGen = new ArrayList<Chromosome>();
+	Generation gen;
+	int[] thisGen = new int[100];
+	ArrayList<Generation> gens = new ArrayList<Generation>();
 	int[] ones = new int[100];
 	Chromosome[] nextGen;
 	double eliteNum = 0;
 	boolean isCrossOver = false;
+	int alleleSize = 100;
+	private ArrayList<Chromosome> chromes = new ArrayList<Chromosome>();
 
 	/**
 	 * ensures: thisGen Lis t of Chromosomes creates a new random generation of size 100
 	 * 
 	 */
-	public void generateRandom() {
+	public void generateRandom(int popSize, int genNum) {
 		
 		 Random rnd = new Random();
-		 rnd.setSeed(0);
 		 
-		 for(int j =0;j<100;j++) {
-			 ArrayList<Integer> arr = new ArrayList<Integer>();		 
-			for(int i =0;i<100;i++) {
-				if(rnd.nextBoolean())
-					arr.add(1);
-				else
-					arr.add(0);
-			}
-			Chromosome a = new Chromosome(arr);
-			thisGen[j]=a;
-		 } 
+		 
+		 for(int i = 0; i < popSize; i++) {
+			 this.gen = new Generation(i);
+
+			 ArrayList<Integer> bits = new ArrayList<Integer>();
+
+			 for(int j = 0; j < alleleSize; j++ ) {
+				 bits.add(rnd.nextInt(0, 1));
+			 }
+			 
+			 Chromosome chrome = new Chromosome(bits);
+			 gen.add(chrome);
+			 gens.add(gen);
+		 }
+		 
 	}
 	
 	/**

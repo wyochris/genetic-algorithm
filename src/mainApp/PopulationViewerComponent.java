@@ -86,4 +86,31 @@ public class PopulationViewerComponent extends JComponent {
 			g2.fillRect(SIDE_OFFSET + i*LINE_WIDTH, yPos, LINE_WIDTH, yPos + worstPer );
 		}	
 	}
+	
+	public void start(int numGen, int popSize, double mRate) {
+		System.out.println("numGen: " + numGen + " popSize: " + popSize + " mRate: " + mRate);
+		Population pop = new Population();
+		pop.generateRandom(popSize, numGen);
+		
+	}
+	public void update(Generation currentGen) {
+		calculateBestFit(currentGen);
+		calculateAvgFit(currentGen);
+		calculateWorstFit(currentGen);
+	}
+
+	private void calculateWorstFit(Generation currentGen) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void calculateAvgFit(Generation currentGen) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void calculateBestFit(Generation currentGen) {
+		// TODO Auto-generated method stub
+		
+	}
 }
