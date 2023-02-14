@@ -87,7 +87,10 @@ public class PopulationViewerComponent extends JComponent {
 		}	
 	}
 	
-	public void start(int numGen, int popSize, int mRate) {
+	public void start(int numGen, int popSize, double mRate) {
+		System.out.println("numGen: " + numGen + " popSize: " + popSize + " mRate: " + mRate);
+		
+		
 		
 	}
 	public void update() {
