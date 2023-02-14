@@ -194,7 +194,7 @@ public class Population {
 		return true;
 	}
 	
-	
+	public void rouletteSelection()
 	public void elitism(double elitism)
 	{
 		eliteNum = elitism;
