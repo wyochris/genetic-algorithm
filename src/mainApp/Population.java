@@ -16,6 +16,7 @@ public class Population {
 	ArrayList<Chromosome> thisGen = new ArrayList<Chromosome>();
 	int[] ones = new int[100];
 	Chromosome[] nextGen;
+	double eliteNum = 0;
 
 	/**
 	 * ensures: thisGen Lis t of Chromosomes creates a new random generation of size 100
@@ -67,10 +68,9 @@ public class Population {
 	}
 	
 	/**
-	 * ensures: the chromosome is sorted??
+	 * ensures: The chromosomes are sorted based on the number of 1s bits
 	 * 
-	 * I have no idea what is going on in this function, specifically 
-	 * lines 87 - 89 
+	 * Checks for 1 bits and swaps the respective chromosome.
 	 * 		- Chris (Reviewer)
 	 */
 	public void bubbleSort() {
@@ -106,7 +106,15 @@ public class Population {
 		for(int i =0;i<50;i++) {
 			thisGen[i].mutate(chance);
 			nextGen[i] = thisGen[i];
-			nextGen[i+50] = thisGen[i].copyAndMutate(chance);
+			if(eliteNum!=0)
+			{
+				nextGen[i+50] = thisGen[i].copyAndMutate(0);
+				eliteNum--;
+			}
+			else
+			{
+				nextGen[i+50] = thisGen[i].copyAndMutate(chance);
+			}
 		}
 	}
 	
@@ -125,6 +133,11 @@ public class Population {
 				thisGen[j]=nextGen[j];
 			}
 		}
+	}
+	
+	public void elitism(double elitism)
+	{
+		eliteNum = elitism;
 	}
 	
 }
