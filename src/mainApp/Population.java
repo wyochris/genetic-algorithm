@@ -9,7 +9,7 @@ import java.util.Random;
  * Functions: Population also sorts populations according to fitness, and generates new 
  * 			  generations
  *  
- * @author lardnece
+ * @author khattam
  *
  */
 public class Population {
