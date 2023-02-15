@@ -232,42 +232,6 @@ public class Population {
 	 * @param generation
 	 */
 	 
-	public Chromosome rouletteSelection()
-	{
-		int totalOnes = 0;
-		
-		for(int i =0;i<chromes.size();i++)
-		{
-			totalOnes+=fitFunc(chromes.get(i));
-		}
-		
-		//Create our wheel
-		//This is an array with  each 
-		//Each wheel entry corresponds to the  % [ratio] of this chromosomes 1s to total ones
-		double[] wheel = new double[chromes.size()];
-		for(int i =0;i<chromes.size();i++)
-		{
-			wheel[i] = 100*fitFunc(chromes.get(i))/totalOnes;
-		}
-		
-		Random rnd = new Random();
-		rnd.setSeed(0);
-		double a = rnd.nextDouble(100);
-
-		
-		for(int c = 0; c<chromes.size();c++)
-		{
-			if(wheel[c]>=a)
-			{
-				a = a-wheel[c];
-			}
-			else
-			{
-				return chromes.get(c);
-			}
-		}
-		return chromes.get(0);
-	}
 	
 	public void elitism(double elitism)
 	{
