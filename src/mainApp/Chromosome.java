@@ -55,7 +55,7 @@ public class Chromosome {
 		return copy;
 	}
 	
-	public int getBasicFit() {
+	public int getBasicFit()  {
 		int count = 0;
 		for(int i: bits) {
 			if(i == 1) {

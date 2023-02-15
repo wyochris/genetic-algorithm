@@ -9,66 +9,47 @@ import java.util.Random;
  * Functions: Population also sorts populations according to fitness, and generates new 
  * 			  generations
  *  
- * @author khattam & 
- * 
+ * @author lardnece
  *
  */
-public class Population {
-	Generation gen;
-	int[] thisGen = new int[100];
-	ArrayList<Generation> gens = new ArrayList<Generation>();
+public class Population2 {
+	ArrayList<Chromosome> thisGen = new ArrayList<Chromosome>();
 	int[] ones = new int[100];
 	Chromosome[] nextGen;
 	double eliteNum = 0;
 	boolean isCrossOver = false;
-	int alleleSize = 100;
-	private ArrayList<Chromosome> chromes = new ArrayList<Chromosome>();
 
 	/**
 	 * ensures: thisGen List of Chromosomes creates a new random generation of size 100
 	 * 
 	 */
-	public void generateRandom(int popSize, int genNum) {
+	public void generateRandom() {
 		
 		 Random rnd = new Random();
+		 rnd.setSeed(0);
 		 
-		 
-		 for(int i = 0; i < popSize; i++) {
-			 this.gen = new Generation(i);
-
-			 ArrayList<Integer> bits = new ArrayList<Integer>();
-
-			 for(int j = 0; j < alleleSize; j++ ) {
-				 bits.add(rnd.nextInt(0, 1));
-			 }
-			 
-			 Chromosome chrome = new Chromosome(bits);
-			 gen.add(chrome);
-			 gens.add(gen);
-		 }
+		 for(int j =0;j<100;j++) {
+			 ArrayList<Integer> arr = new ArrayList<Integer>();		 
+			for(int i =0;i<100;i++) {
+				if(rnd.nextBoolean())
+					arr.add(1);
+				else
+					arr.add(0);
+			}
+			Chromosome a = new Chromosome(arr);
+			buffer=a;
+			thisGen.add(j, buffer);
+		 } 
 	}
 	
-	public ArrayList<Generation> getGens(){
-		return this.gens;
-	}
+	/**
+	 * ensures: the number of 1's in a chromosome's alleles is counted
+	 * @param Chromosome c to be evaluated
+	 * @return count, the number of 1's
+	 * 
+	 */
+	public int fitFunc(Chromosome c) {
 	
-	public ArrayList<Integer> getFitArray(){
-		ArrayList<Integer> fitArray = new ArrayList<Integer>();
-		for(int i = 0; i < 100; i++) {
-			fitArray.add(gens.get(i).getChromes().get(i).getBasicFit());
-			System.out.println(fitArray.get(i));
-		}
-		return fitArray;
-	}
-		
-//	/**
-//	 * ensures: the number of 1's in a chromosome's alleles is counted
-//	 * @param Chromosome c to be evaluated
-//	 * @return count, the number of 1's
-//	 * 
-//	 */
-	public int fitFunc(Chromosome c)
-	{
 		int count = 0;
 		for(int i =0;i<c.bits.size();i++) {
 			if(c.bits.get(i)==1)
@@ -83,9 +64,8 @@ public class Population {
 	 * 
 	 */
 	public void createOne() {
-		for(int i =0;i<thisGen.length;i++) 
-		{
-			ones[i] = fitFunc(chromes.get(i));
+		for(int i =0;i<thisGen.length;i++) {
+			ones[i] = fitFunc(thisGen[i]);
 		}
 	}
 	
@@ -107,11 +87,10 @@ public class Population {
 					ones[i]=ones[i+1];
 					ones[i+1]=tempInt;
 					
-					temp=chromes.get(i);
-					chromes.remove(i);
-					chromes.add(i,chromes.get(i+1));
-					chromes.remove(i+1);
-					chromes.add(i+1,temp);
+					temp=thisGen[i];
+					thisGen[i] = thisGen[i+1];
+					thisGen[i+1] = temp;
+					isSorted=false;	
 				}
 			}
 			
@@ -127,16 +106,16 @@ public class Population {
 		bubbleSort();
 		//Passing top 50
 		for(int i =0;i<50;i++) {
-			chromes.get(i).mutate(chance);
-			nextGen[i] = chromes.get(i);
+			thisGen.get(i).mutate(chance);
+			nextGen[i] = thisGen.get(i);
 			if(eliteNum!=0)
 			{
-				nextGen[i+50] = chromes.get(i).copyAndMutate((double) 0);
+				nextGen[i+50] = thisGen.get(i).copyAndMutate(0);
 				eliteNum--;
 			}
 			else
 			{
-				nextGen[i+50] = chromes.get(i).copyAndMutate(chance);
+				nextGen[i+50] = thisGen.get(i).copyAndMutate(chance);
 			}
 		}
 	}
@@ -147,16 +126,14 @@ public class Population {
 	 * @param chance
 	 * @param generation
 	 */
-	public void evoLoop(double chance, int generation,int popSize) {
-		
+	public void evoLoop(double chance, int generation) {
+		generateRandom();
 		for(int i =1;i<=generation;i++) {
-			generateRandom(popSize, i);
-			nextGen = new Chromosome[chromes.size()];
+			nextGen = new Chromosome[thisGen.size()];
 			evoLoopHelper(chance);
-			for(int j =0;i<chromes.size();i++)
-			{
-				Chromosome buffer = nextGen[i];
-				chromes.set(i, buffer);
+			for(int j =0;i<100;i++){
+				Chromosome buffer = nextGen[j];
+				thisGen.add(j, buffer);
 			}
 		}
 	}
@@ -216,17 +193,15 @@ public class Population {
 				return false;
 			}
 		}
-		return true ;
+		return true;
 	}
 	
-	//Push rouletteSelection
 	public void rouletteSelection()
-	{
-		
-	}
 	public void elitism(double elitism)
 	{
 		eliteNum = elitism;
 	}
+		
+	
 	
 }
