@@ -111,10 +111,11 @@ public class PopulationViewer extends JComponent {
 					popComp.start(Integer.parseInt(numGen.getText()), 
 							Integer.parseInt(numPop.getText()), Double.parseDouble(mutateRate.getText()));
 					
-					start.setText("Stop");
+					start.setText("Stop");	
 				}
 				else {
 					t.stop();
+					popComp.clear();
 					start.setText("Start");
 				}
 			} });
@@ -126,7 +127,24 @@ public class PopulationViewer extends JComponent {
 		//Starts the simulator
 		frame.pack();
 		frame.setVisible(true);	
+		
+//		System.out.println(start.getText() == "Stop");
+//			while(true) {
+//
+//				if(start.getText() == "Stop") {
+//					System.out.println("HIIIIIII");
+//					popComp.update();
+//					popComp.repaint();
+//				}
+//				else {
+//					break;
+//				}
+//			}
+			
+			
 	}
+	
+	
 	
 
 }

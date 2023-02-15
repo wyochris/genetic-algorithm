@@ -54,4 +54,14 @@ public class Chromosome {
 		copy.mutate(chance);
 		return copy;
 	}
+	
+	public int getBasicFit() {
+		int count = 0;
+		for(int i: bits) {
+			if(i == 1) {
+				count++;
+			}
+		}
+		return count;
+	}
 }

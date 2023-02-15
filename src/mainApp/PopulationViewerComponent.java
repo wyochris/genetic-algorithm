@@ -88,7 +88,9 @@ public class PopulationViewerComponent extends JComponent {
 		System.out.println("numGen: " + numGen + " popSize: " + popSize + " mRate: " + mRate);
 		Population pop = new Population();
 		pop.generateRandom(popSize, numGen);
-		
+		for(Generation t: pop.gens ) {
+			updateGen(t);
+		}
 		
 	}
 	public void updateGen(Generation currentGen) {
@@ -97,17 +99,17 @@ public class PopulationViewerComponent extends JComponent {
 		calculateWorstFit(currentGen);
 	}
 
-	private void calculateWorstFit(Generation currentGen) {
+	private void calculateWorstFit(Generation cG) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void calculateAvgFit(Generation currentGen) {
+	private void calculateAvgFit(Generation cG) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void calculateBestFit(Generation currentGen) {
+	private void calculateBestFit(Generation cG) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -115,5 +117,12 @@ public class PopulationViewerComponent extends JComponent {
 	public void update() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
+		this.bestFit.clear();
+		this.avgFit.clear();
+		this.worstFit.clear();
 	}
 }

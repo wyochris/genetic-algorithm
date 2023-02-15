@@ -87,9 +87,12 @@ public class MainViewer{
 			}
 		});
 	
+
+		
 //		frame.pack();
 		frame.add(controlPanel, BorderLayout.NORTH );
 		frame.setVisible(true);
+		
 		
 	}
 } // driverMain

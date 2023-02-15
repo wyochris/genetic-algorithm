@@ -45,9 +45,21 @@ public class Population {
 			 gen.add(chrome);
 			 gens.add(gen);
 		 }
-		 
 	}
 	
+	public ArrayList<Generation> getGens(){
+		return this.gens;
+	}
+	
+	public ArrayList<Integer> getFitArray(){
+		ArrayList<Integer> fitArray = new ArrayList<Integer>();
+		for(int i = 0; i < 100; i++) {
+			fitArray.add(gens.get(i).getChromes().get(i).getBasicFit());
+			System.out.println(fitArray.get(i));
+		}
+		return fitArray;
+	}
+		
 	/**
 	 * ensures: the number of 1's in a chromosome's alleles is counted
 	 * @param Chromosome c to be evaluated

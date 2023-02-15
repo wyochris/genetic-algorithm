@@ -19,4 +19,18 @@ public class Generation {
 		// TODO Auto-generated method stub
 		this.chromes.add(chrome2);
 	}
+
+	/**
+	 * @return the chromes
+	 */
+	public ArrayList<Chromosome> getChromes() {
+		return chromes;
+	}
+
+	/**
+	 * @return the generation
+	 */
+	public int getGeneration() {
+		return generation;
+	}
 }
