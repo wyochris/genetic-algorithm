@@ -17,12 +17,12 @@ public class Population {
 	Generation gen;
 	int[] thisGen = new int[100];
 	ArrayList<Generation> gens = new ArrayList<Generation>();
-	int[] ones = new int[100];
 	Chromosome[] nextGen;
 	double eliteNum = 0;
 	boolean isCrossOver = false;
 	int alleleSize = 100;
 	private ArrayList<Chromosome> chromes = new ArrayList<Chromosome>();
+	int[] ones = new int[chromes.size()];
 
 	/**
 	 * ensures: thisGen List of Chromosomes creates a new random generation of size 100
@@ -31,6 +31,7 @@ public class Population {
 	public void generateRandom(int popSize, int genNum) {
 		
 		 Random rnd = new Random();
+		 rnd.setSeed(0);
 		 
 		 
 		 for(int i = 0; i < popSize; i++) {
@@ -219,11 +220,62 @@ public class Population {
 		return true ;
 	}
 	
-	//Push rouletteSelection
-	public void rouletteSelection()
+	/*his function stochastically selects some chromosomes. Think of it has a random wheel spin however
+	all parts on this wheel is not equal. THe highers 1s a chromosome has, 
+	the higher chunk it has in the wheel
+	vice versa 
+	  */
+	/**
+	 * ensures: stochastic wheel selection for chromosomes (i thought it would save time if i write this java docs (driver Medhansh)
+	 * 			spins a wheel, with each chromosome having unequal chunks of the wheel based on their fitness
+	 * @param chance
+	 * @param generation
+	 */
+	 
+	public Chromosome rouletteSelection()
 	{
+		int totalOnes = 0;
 		
+		for(int i =0;i<chromes.size();i++)
+		{
+			totalOnes+=fitFunc(chromes.get(i));
+		}
+		
+		for(int i =0;i<ones.length;i++)
+		{
+			totalOnes+=ones[i];
+		}
+		
+		//Create our wheel
+		//This is an array with  each 
+		//Each wheel entry corresponds to the  % [ratio] of this chromosomes 1s to total ones
+		double[] wheel = new double[chromes.size()];
+		for(int i =0;i<chromes.size();i++)
+		{
+			wheel[i] = 100*fitFunc(chromes.get(i))/totalOnes;
+		}
+		
+		Random rnd = new Random();
+		rnd.setSeed(0);
+		double a = rnd.nextDouble(100);
+
+		
+		for(int c = 0; c<wheel.length;c++)
+		{
+			if(wheel[c]>=a)
+			{
+				a = a-wheel[c];
+			}
+			else
+			{
+				return chromes.get(c);
+			}
+		}
+		
+		return null;
 	}
+	
+	
 	public void elitism(double elitism)
 	{
 		eliteNum = elitism;
