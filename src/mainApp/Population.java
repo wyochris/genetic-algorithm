@@ -9,7 +9,7 @@ import java.util.Random;
  * Functions: Population also sorts populations according to fitness, and generates new 
  * 			  generations
  *  
- * @author lardnece
+ * @author khattam
  *
  */
 public class Population {
@@ -154,7 +154,7 @@ public class Population {
 			}
 		}
 	}
-	
+	//This is another type of fitness function 
 	public boolean smileyFitness(Chromosome c)
 	{
 		int a[]= new int[12];
@@ -197,12 +197,28 @@ public class Population {
 		return false;
 	}
 	
+	//This function checks if the chromosome has more continous 1s than allowed param maxOnes. If it does then it is decrlared unfit
+	public boolean maxFit(Chromosome c, int maxOnes)
+	{
+		int maxCount = 0;
+		for(int i =0;i<c.bits.size();i++) 
+		{
+			if(c.bits.get(i)==1)
+				maxCount++;
+			if(maxCount>maxOnes)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 	
+	public void rouletteSelection()
 	public void elitism(double elitism)
 	{
 		eliteNum = elitism;
 	}
-	
+		
 	
 	
 }
