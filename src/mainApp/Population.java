@@ -241,11 +241,6 @@ public class Population {
 			totalOnes+=fitFunc(chromes.get(i));
 		}
 		
-		for(int i =0;i<ones.length;i++)
-		{
-			totalOnes+=ones[i];
-		}
-		
 		//Create our wheel
 		//This is an array with  each 
 		//Each wheel entry corresponds to the  % [ratio] of this chromosomes 1s to total ones
@@ -260,7 +255,7 @@ public class Population {
 		double a = rnd.nextDouble(100);
 
 		
-		for(int c = 0; c<wheel.length;c++)
+		for(int c = 0; c<chromes.size();c++)
 		{
 			if(wheel[c]>=a)
 			{
@@ -271,10 +266,8 @@ public class Population {
 				return chromes.get(c);
 			}
 		}
-		
-		return null;
+		return chromes.get(0);
 	}
-	
 	
 	public void elitism(double elitism)
 	{
