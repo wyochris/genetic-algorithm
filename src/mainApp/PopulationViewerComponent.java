@@ -18,7 +18,7 @@ public class PopulationViewerComponent extends JComponent {
 	 */
 	private static final long serialVersionUID = 1L;
 	//How thick the lines are in the graph
-	public static final int LINE_WIDTH   = 2;
+	public static final int LINE_WIDTH   = 10;
 	//How high to makes the graph
 	public static final int STATS_HEIGHT = 200;
 	//How wide to make side panel for reporting numbers
@@ -34,9 +34,9 @@ public class PopulationViewerComponent extends JComponent {
 	private Population pop;
 	private Double chance ;
 	
-	private int bestYP = 1;
-	private int worstYP = 1;
-	private int avgYP = 1;
+	private int bestYP = this.getHeight();
+	private int worstYP = this.getHeight();
+	private int avgYP = this.getHeight();
 
 	
 	//add to the logs
@@ -75,6 +75,11 @@ public class PopulationViewerComponent extends JComponent {
 			g2.drawString("Worst Fitness:", SIDE_OFFSET/10, STATS_HEIGHT*3/4 );
 			
 			System.out.println("hello 1");
+			
+			this.bestYP = this.getHeight() * bestFit.get(0) / this.getHeight();
+			this.avgYP = (int) (this.getHeight() * avgFit.get(0) / this.getHeight());
+			this.worstYP = this.getHeight() * worstFit.get(0) / this.getHeight();
+
 
 					
 		}
@@ -86,27 +91,36 @@ public class PopulationViewerComponent extends JComponent {
 			double total = bestFit.size();
 			
 			//make it percentageBased
-			int bestPer = (int)(STATS_HEIGHT * bestFit.get(i));
-			int avgPer = (int)(STATS_HEIGHT * avgFit.get(i));
-			int worstPer = (int)(STATS_HEIGHT * worstFit.get(i));
+			int bestPer = (int)(this.getHeight() * bestFit.get(i) / this.getHeight());
+			int avgPer = (int)(this.getHeight() * avgFit.get(i)) / this.getHeight();
+			int worstPer = (int)(this.getHeight() * worstFit.get(i)) / this.getHeight();
 			
 			//offset slightly to get lines to show up
 
 			g2.setColor(Color.BLACK);
-			g2.drawLine(SIDE_OFFSET + i*LINE_WIDTH, bestYP, SIDE_OFFSET + i*LINE_WIDTH, bestPer + bestYP);
-//			System.out.println(SIDE_OFFSET + i*LINE_WIDTH + " " + bestYP + " " + SIDE_OFFSET + i*LINE_WIDTH + " " + bestPer + bestYP);
+			g2.drawLine(SIDE_OFFSET + i*LINE_WIDTH, this.bestYP,
+					SIDE_OFFSET + i*LINE_WIDTH + LINE_WIDTH, bestPer);
+			System.out.println("");
+			System.out.println(bestYP + " " + bestPer);
+			System.out.println(avgYP + " " + avgPer);
+			System.out.println(worstYP + " " + worstPer);
+			System.out.println("");
+
+
 			
 			g2.setColor(Color.BLUE);
-			g2.drawLine(SIDE_OFFSET + i*LINE_WIDTH, avgYP, SIDE_OFFSET + i*LINE_WIDTH, avgPer + avgYP );
+			g2.drawLine(SIDE_OFFSET + i*LINE_WIDTH, this.avgYP,
+					SIDE_OFFSET + i*LINE_WIDTH + LINE_WIDTH, avgPer);	
 			
 			g2.setColor(Color.RED);
-			g2.drawLine(SIDE_OFFSET + i*LINE_WIDTH, worstYP, SIDE_OFFSET + i*LINE_WIDTH, worstPer + worstYP );
+			g2.drawLine(SIDE_OFFSET + i*LINE_WIDTH, this.worstYP,
+					SIDE_OFFSET + i*LINE_WIDTH + LINE_WIDTH, worstPer);
 			
-			this.bestYP += bestPer;
-			this.avgYP += avgPer;
+			this.bestYP = bestPer;
+			this.avgYP = avgPer;
 			this.worstYP = worstPer;
 			
-			System.out.println("hello 2");
+//			System.out.println("hello 2");
 
 		}	
 	}
@@ -131,7 +145,7 @@ public class PopulationViewerComponent extends JComponent {
 	}
 	public void updateGen(Generation currentGen) {
 		this.bestFit.add(calculateBestFit(currentGen));
-		this.avgFit.add(calculateAvgFit(currentGen));
+		this.avgFit.add((double) calculateAvgFit(currentGen));
 		this.worstFit.add(calculateWorstFit(currentGen));
 		if(bestFit.size() > this.numGen) {
 			return;
@@ -141,21 +155,25 @@ public class PopulationViewerComponent extends JComponent {
 
 	private Integer calculateWorstFit(Generation cG) {
 		// TODO Auto-generated method stub
-		return cG.getFitArray().get(0);
+		return cG.getFitArray().get(cG.getFitArray().size() - 1);
+
 	}
 
 	private Integer calculateBestFit(Generation cG) {
 		// TODO Auto-generated method stub
-		return cG.getFitArray().get(this.numGen - 1);
+		return cG.getFitArray().get(0);
+
 	}
 	
-	private Double calculateAvgFit(Generation cG) {
+	private int calculateAvgFit(Generation cG) {
 		// TODO Auto-generated method stub
 		int sum = 0;
-		for(int i = 0; i < numGen; i++) {
+		for(int i = 0; i < cG.getFitArray().size(); i++) {
 			sum += cG.getFitArray().get(i);
 		}
-		return (double) (sum / numGen);
+		System.out.println(sum / cG.getFitArray().size());
+
+		return (int) (sum / cG.getFitArray().size());
 	}
 
 	public void update() {

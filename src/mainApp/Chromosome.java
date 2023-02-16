@@ -49,7 +49,8 @@ public class Chromosome {
 		for(int i = 0; i < this.bits.size(); i++) {
 			copy.bits.add(this.bits.get(i));
 		}
-		copy.mutate(chance);
+		copy.mutate(20.0);
+//		System.out.println(this.bits);
 //		System.out.println(copy.bits);
 		return copy;
 	}

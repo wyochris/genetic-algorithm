@@ -17,9 +17,9 @@ public class Generation {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void add(Chromosome chrome2) {
+	public void add(Chromosome c) {
 		// TODO Auto-generated method stub
-		this.chromes.add(chrome2);
+		this.chromes.add(c);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class Generation {
 			fitArray.add(chromes.get(i).getBasicFit());
 		}
 		Collections.sort(fitArray);
-		System.out.println(fitArray);
+//		System.out.println(fitArray);
 		return fitArray;
 	}
 	
