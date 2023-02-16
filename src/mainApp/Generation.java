@@ -1,6 +1,8 @@
 package mainApp;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Generation {
 	
@@ -33,4 +35,15 @@ public class Generation {
 	public int getGeneration() {
 		return generation;
 	}
+	
+	public ArrayList<Integer> getFitArray(){
+		ArrayList<Integer> fitArray = new ArrayList<Integer>();
+		for(int i = 0; i < 100; i++) {
+			fitArray.add(chromes.get(i).getBasicFit());
+//			System.out.println(fitArray.get(i));
+		}
+		Collections.sort(fitArray);
+		return fitArray;
+	}
+	
 }

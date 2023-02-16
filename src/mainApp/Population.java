@@ -22,43 +22,63 @@ public class Population {
 	boolean isCrossOver = false;
 	int alleleSize = 100;
 	private ArrayList<Chromosome> chromes = new ArrayList<Chromosome>();
+	private int popSize;
+	private Double chance;
 
 	/**
-	 * ensures: thisGen Lis t of Chromosomes creates a new random generation of size 100
+	 * ensures: Make popSize generations of popSize chromosomes, with alleleSize alleles
 	 * 
 	 */
-	public void generateRandom(int popSize, int genNum) {
+	public void generateRandom(int popSize) {
+		
+		this.popSize = popSize;
 		
 		 Random rnd = new Random();
 		 
-		 
-		 for(int i = 0; i < popSize; i++) {
-			 this.gen = new Generation(i);
+		 this.gen = new Generation(0);
 
+ 
+		 for(int k = 0; k < popSize; k++) {
 			 ArrayList<Integer> bits = new ArrayList<Integer>();
 
 			 for(int j = 0; j < alleleSize; j++ ) {
-				 bits.add(rnd.nextInt(0, 1));
+				 bits.add(rnd.nextInt(0, 2));
+//				 System.out.println(bits.get(j));
 			 }
-			 
 			 Chromosome chrome = new Chromosome(bits);
+//			 System.out.println("made a chromosome!");
 			 gen.add(chrome);
-			 gens.add(gen);
 		 }
+		 
+		 gens.add(gen);
 	}
 	
 	public ArrayList<Generation> getGens(){
 		return this.gens;
 	}
 	
-	public ArrayList<Integer> getFitArray(){
-		ArrayList<Integer> fitArray = new ArrayList<Integer>();
-		for(int i = 0; i < 100; i++) {
-			fitArray.add(gens.get(i).getChromes().get(i).getBasicFit());
-			System.out.println(fitArray.get(i));
+	public void nextGen(Double chance){		 
+
+		for(int k = 0; k < popSize; k++) {
+			Chromosome newGenChrome = this.gen.getChromes().get(k).copyAndMutate(chance);
+			gen.add(newGenChrome);
 		}
-		return fitArray;
+		System.out.println("made a gen!");
+
+		gens.add(gen);
 	}
+	/**
+	 * 
+	 * @return fitarray of a generation
+	 */
+//	public ArrayList<Integer> getFitArray(Generation gen){
+//		ArrayList<Integer> fitArray = new ArrayList<Integer>();
+//		for(int i = 0; i < 100; i++) {
+//			fitArray.add(gen.getChromes().get(i).getBasicFit());
+//			System.out.println(fitArray.get(i));
+//		}
+//		return fitArray;
+//	}
 		
 //	/**
 //	 * ensures: the number of 1's in a chromosome's alleles is counted
