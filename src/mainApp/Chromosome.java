@@ -50,15 +50,11 @@ public class Chromosome {
 			copy.bits.add(this.bits.get(i));
 		}
 		copy.mutate(chance);
+//		System.out.println(copy.bits);
 		return copy;
 	}
 	
-<<<<<<< HEAD
-	public int getBasicFit() {
-//		System.out.println(bits.size());
-=======
 	public int getBasicFit()  {
->>>>>>> branch 'master' of https://github.com/rhit-csse220/csse220-winter-2022-23-final-project-w23_r_201
 		int count = 0;
 		for(int i: bits) {
 			if(i == 1) {

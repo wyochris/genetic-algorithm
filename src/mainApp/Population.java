@@ -9,8 +9,7 @@ import java.util.Random;
  * Functions: Population also sorts populations according to fitness, and generates new 
  * 			  generations
  *  
- * @author khattam & 
- * 
+ * @author lardnece
  *
  */
 public class Population {
@@ -22,25 +21,18 @@ public class Population {
 	boolean isCrossOver = false;
 	int alleleSize = 100;
 	private ArrayList<Chromosome> chromes = new ArrayList<Chromosome>();
-<<<<<<< HEAD
 	private int popSize;
 	private Double chance;
-=======
 	int[] ones = new int[chromes.size()];
->>>>>>> branch 'master' of https://github.com/rhit-csse220/csse220-winter-2022-23-final-project-w23_r_201
 
 	/**
-<<<<<<< HEAD
 	 * ensures: Make popSize generations of popSize chromosomes, with alleleSize alleles
-=======
 	 * ensures: thisGen List of Chromosomes creates a new random generation of size 100
->>>>>>> branch 'master' of https://github.com/rhit-csse220/csse220-winter-2022-23-final-project-w23_r_201
 	 * 
 	 */
 	public void generateRandom(int popSize) {
 		
 		this.popSize = popSize;
-		
 		 Random rnd = new Random();
 		 rnd.setSeed(0);
 		 

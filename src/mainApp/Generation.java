@@ -40,9 +40,9 @@ public class Generation {
 		ArrayList<Integer> fitArray = new ArrayList<Integer>();
 		for(int i = 0; i < 100; i++) {
 			fitArray.add(chromes.get(i).getBasicFit());
-//			System.out.println(fitArray.get(i));
 		}
 		Collections.sort(fitArray);
+		System.out.println(fitArray);
 		return fitArray;
 	}
 	
