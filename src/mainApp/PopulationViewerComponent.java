@@ -130,7 +130,8 @@ public class PopulationViewerComponent extends JComponent {
 		this.setPreferredSize(new Dimension(800, STATS_HEIGHT) );
 	}
 
-	public void start(int numGen, int popSize, double mRate) {
+	public void start(int numGen, int popSize, double mRate, String selecionType, Boolean isElitism) {
+		System.out.println(isElitism);
 		this.numGen = numGen;
 		this.curGenNum = 0;
 		this.chance = mRate;

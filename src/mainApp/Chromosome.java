@@ -58,10 +58,10 @@ public class Chromosome implements Comparable<Chromosome>{
 		for(int i = 0; i < this.bits.size(); i++) {
 			copy.bits.add(this.bits.get(i));
 		}
-		for(int i = 49; i < 50; i++) {
-			copy.bits.set(i, copy.bits.get(i - 49));
-		}
-		copy.mutate(chance)
+//		for(int i = 49; i < 50; i++) {
+//			copy.bits.set(i, copy.bits.get(i - 49));
+//		}
+		copy.mutate(chance);
 //		System.out.println(this.bits);
 //		System.out.println(copy.bits);
 		return copy;

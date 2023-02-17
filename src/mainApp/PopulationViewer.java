@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -56,7 +57,7 @@ public class PopulationViewer extends JComponent {
 		buttonPanel.add(dropdownPanel);
 		
 		//Modify this if you wish to add different numbers of things into the simulation
-		String[] numbersForDropdown = {"Truncation"};
+		String[] numbersForDropdown = {"Truncation","Roulette", "Smiley", "Bogo", "Rank"};
 		// create a combo box with the fixed array so you can pick how many things to add
 		JComboBox<String> addNumberSelector = new JComboBox<String>(numbersForDropdown);
 		//set its maximum size to be its preferred size so it doesn't get too big
@@ -66,15 +67,18 @@ public class PopulationViewer extends JComponent {
 		dropdownPanel.add( addNumberSelector );
 		dropdownPanel.setMaximumSize( dropdownPanel.getPreferredSize() );
 		
-		JLabel mutuateRateText = new JLabel("Mutation rate: ");
-		buttonPanel.add(mutuateRateText);
 		JTextField mutateRate = new JTextField("1.0");
+		JCheckBox elitismBox = new JCheckBox( "Elsitism?");
+		buttonPanel.add(elitismBox);
+		
 //		numGen.addActionListener(new ActionListener() {
 //			@Override
 //			public void actionPerformed(ActionEvent e) {
 //				//passes in the number from the dropdown list
 //				
 //			} });
+		JLabel mutuateRateText = new JLabel("Mutation rate: ");
+		buttonPanel.add(mutuateRateText);
 		buttonPanel.add( mutateRate );
 		
 		//Button for adding Particles to a simulation
@@ -109,10 +113,11 @@ public class PopulationViewer extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(start.getText() == "Start") {
+					Boolean isElitism = elitismBox.isSelected();
 					t.start();
 					popComp.start(Integer.parseInt(numGen.getText()), 
-							Integer.parseInt(numPop.getText()), Double.parseDouble(mutateRate.getText()));
-					
+							Integer.parseInt(numPop.getText()), Double.parseDouble(mutateRate.getText()), "Truncation", isElitism);
+					System.out.println(isElitism);
 					start.setText("Stop");	
 				}
 				else {
