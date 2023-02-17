@@ -1,6 +1,8 @@
 package mainApp;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Generation {
 	
@@ -15,9 +17,9 @@ public class Generation {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void add(Chromosome chrome2) {
+	public void add(Chromosome c) {
 		// TODO Auto-generated method stub
-		this.chromes.add(chrome2);
+		this.chromes.add(c);
 	}
 
 	/**
@@ -33,4 +35,15 @@ public class Generation {
 	public int getGeneration() {
 		return generation;
 	}
+	
+	public ArrayList<Integer> getFitArray(){
+		ArrayList<Integer> fitArray = new ArrayList<Integer>();
+		for(int i = 0; i < 100; i++) {
+			fitArray.add(chromes.get(i).getBasicFit());
+		}
+		Collections.sort(fitArray);
+//		System.out.println(fitArray);
+		return fitArray;
+	}
+	
 }

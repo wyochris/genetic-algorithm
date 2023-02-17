@@ -5,6 +5,7 @@
 package mainApp;
 
 import java.awt.Graphics2D;
+import java.util.Random;
 
 import javax.swing.JComponent;
 
@@ -23,6 +24,11 @@ public class MainApp extends JComponent {
 	private void runApp() {
 		System.out.println("Write your cool arcade game here!");
 		MainViewer mainV = new MainViewer();
+//		Random rand = new Random();
+//		System.out.println(rand.nextInt(0,2));
+//		System.out.println(rand.nextInt(0,2));
+//		System.out.println(rand.nextInt(0,2));
+
 	} // runApp
 
 	/**

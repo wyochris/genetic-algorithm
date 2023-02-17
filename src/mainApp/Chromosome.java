@@ -32,9 +32,9 @@ public class Chromosome {
 					bits.set(i, 1);
 				}
 			}
-			System.out.print(bits.get(i));
+//			System.out.print(bits.get(i));
 		}
-		System.out.println("");
+//		System.out.println("");
 	}
 	
 	//Return the number of bit s i.e 0s and 1s in the Chromosome
@@ -44,14 +44,17 @@ public class Chromosome {
 	}
 	
 	// THis method is used in the evolutionary loop to create deep copies for the next generations
-	public Chromosome copyAndMutate(Double chance)
-	{
-		Chromosome copy = new Chromosome();
-		for(int i =0;i<=this.bits.size();i++)
-		{
+	public Chromosome copyAndMutate(Double chance) {
+		Chromosome copy = new Chromosome(new ArrayList<Integer>());
+		for(int i = 0; i < this.bits.size(); i++) {
 			copy.bits.add(this.bits.get(i));
 		}
-		copy.mutate(chance);
+		for(int i = 49; i < 50; i++) {
+			copy.bits.set(i, copy.bits.get(i - 49));
+		}
+		copy.mutate(90.0);
+//		System.out.println(this.bits);
+//		System.out.println(copy.bits);
 		return copy;
 	}
 	
@@ -62,6 +65,7 @@ public class Chromosome {
 				count++;
 			}
 		}
+//		System.out.println(count);
 		return count;
 	}
 }

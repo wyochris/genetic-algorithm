@@ -29,17 +29,19 @@ import javax.swing.Timer;
 public class PopulationViewer extends JComponent {
 	
 	final int frameXLoc = 500;
-	final int frameYLoc = 500;
+	final int frameYLoc = 400;
 	
 	public PopulationViewer() {
 		JFrame frame = new JFrame();
-		frame.setPreferredSize(null);
+		frame.setPreferredSize(new Dimension(800, 600));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocation(frameXLoc, frameYLoc);
 		
 		//Create a component for watching simulations
 		PopulationViewerComponent popComp = new PopulationViewerComponent();
-		frame.add(popComp, BorderLayout.NORTH);
+		frame.add(popComp, BorderLayout.CENTER);
+		
+		
 		//create a panel for buttons
 		JPanel buttonPanel = new JPanel();
 		//Set up the panel to use a vertical layout and give it a background color
