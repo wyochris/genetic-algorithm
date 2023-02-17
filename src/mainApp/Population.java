@@ -39,17 +39,20 @@ public class Population {
 //		 this.gen = new Generation(0);
 
  
-		 for(int k = 0; k < popSize; k++) {
+		 for(int k = 0; k < popSize; k++)
+		 {
 			 ArrayList<Integer> bits = new ArrayList<Integer>();
 			 this.gen = new Generation(k);
 
-			 for(int j = 0; j < alleleSize; j++ ) {
+			 for(int j = 0; j < alleleSize; j++ ) 
+			 {
 				 bits.add(rnd.nextInt(0, 2));
 //				 System.out.println(bits.get(j));
 			 }
 			 Chromosome chrome = new Chromosome(bits);
 //			 System.out.println("made a chromosome!");
 			 gen.add(chrome);
+			 chromes.add(chrome);
 
 		 }
 		 
@@ -102,8 +105,8 @@ public class Population {
 	 * 			holds the fitness count of the chromosomes
 	 * 
 	 */
-	public void createOne() {
-		for(int i =0;i<thisGen.length;i++) 
+	public void createOne(int pop) {
+		for(int i =0;i<pop;i++) 
 		{
 			ones[i] = fitFunc(chromes.get(i));
 		}
@@ -142,9 +145,9 @@ public class Population {
 	 * ensures: the top 50 is mutated in passed into the nextGeneration
 	 * @param chance, passed in by GUI or default 1
 	 */
-	public void evoLoopHelper(double chance) 
+	public void evoLoopHelper(double chance,int popsize) 
 	{
-		createOne();
+		createOne(popsize);
 		bubbleSort();
 		//Passing top 50
 		for(int i =0;i<50;i++) {
@@ -171,9 +174,9 @@ public class Population {
 	public void evoLoop(double chance, int generation,int popSize) {
 		
 		for(int i =1;i<=generation;i++) {
-			generateRandom(popSize, i);
+			generateRandom(popSize);
 			nextGen = new Chromosome[chromes.size()];
-			evoLoopHelper(chance);
+			evoLoopHelper(chance,popSize);
 			for(int j =0;i<chromes.size();i++)
 			{
 				Chromosome buffer = nextGen[i];
@@ -184,23 +187,24 @@ public class Population {
 	//This is another type of fitness function 
 	public boolean smileyFitness(Chromosome c)
 	{
-		int a[]= new int[12];
-		a[0] = 22;
-		a[1] = 27;
-		a[2] = 71;
-		a[3] = 78;
-		int k = 4;
-		for(int i =81;i<=88;i++)
+		ArrayList<Integer> smileyBits = new ArrayList<Integer>();
+		for(int i =0;i<100;i++)
 		{
-			a[k] = i;
-			k++;
+			smileyBits.add(1);
+		}
+		smileyBits.set(22, 0);
+		smileyBits.set(27, 0);
+		smileyBits.set(71, 0);
+		smileyBits.set(78, 0);
+		
+		for(int i = 81;i<=88;i++)
+		{
+			smileyBits.set(i, 0);
 		}
 		
-		//At this we have created the smiley indexes i.e all points where there should be 0s in the smiley
-		
-		for(int i =0;i<c.bits.size();i++) {
-			
-			if(c.bits.get(i)==0 && isIn(i,a))
+		for(int i =0;i<c.getChromeSize();i++)
+		{
+			if(c.bits.get(i)==smileyBits.get(i))
 			{
 				
 			}
@@ -209,19 +213,8 @@ public class Population {
 				return false;
 			}
 		}
-		return true;	
-	}
-	
-	public boolean isIn(int i, int[] a)
-	{
-		for(int j = 0;j<a.length;j++)
-		{
-			if(a[j]==i)
-			{
-				return true;
-			}
-		}
-		return false;
+		return true;
+		
 	}
 	
 	//This function checks if the chromosome has more continous 1s than allowed param maxOnes. If it does then it is decrlared unfit
@@ -291,5 +284,109 @@ public class Population {
 	public void elitism(double elitism)
 	{
 		eliteNum = elitism;
+	}
+	
+	public static void main(String [] args)
+	{
+		Population tester = new Population();
+		System.out.println("tests");
+		ArrayList<Integer> bits = new ArrayList<Integer>();
+		for(int i = 1;i<=100;i++)
+		{
+			if(Math.random()>0.5)
+			{
+				bits.add(0);
+			}
+			else
+			{
+				bits.add(1);
+			}
+			
+		}
+		
+		Chromosome a =  new Chromosome(bits);
+		
+		System.out.println();
+		System.out.println("Testing for Fitfunc");
+		System.out.println(tester.fitFunc(a));
+		System.out.println();
+		
+		//Now testing Smiley Fitness
+		/*
+		int arr[]= new int[12];
+		arr[0] = 22;
+		arr[1] = 27;
+		arr[2] = 71;
+		arr[3] = 78;
+		int k = 4;
+		for(int i =81;i<=88;i++)
+		{
+			arr[k] = i;
+			k++;
+		}
+		*/
+		
+		ArrayList<Integer> smileyBits = new ArrayList<Integer>();
+		
+		for(int i =0;i<100;i++)
+		{
+			smileyBits.add(1);
+		}
+		smileyBits.set(22, 0);
+		smileyBits.set(27, 0);
+		smileyBits.set(71, 0);
+		smileyBits.set(78, 0);
+		
+		for(int i = 81;i<=88;i++)
+		{
+			smileyBits.set(i, 0);
+		}
+		
+		for (int number : smileyBits) {
+	    System.out.print(number);
+		}
+		
+		
+		System.out.println();
+		System.out.println("Testing for smiley function");
+		System.out.println("First for an random chromosome a, should return false unless randomly smiley is generated");
+		System.out.println(tester.smileyFitness(a));
+		Chromosome smileyTest = new Chromosome(smileyBits);
+		System.out.println("Second for an random chromosome simleyBits, should return true ");
+		System.out.println(tester.smileyFitness(smileyTest));
+		System.out.println();
+		System.out.println();
+		
+		//Testing for maxFit
+		
+		for(int i =0;i<=8;i++)
+		{
+			bits.set(i,0);
+		}
+		
+		System.out.println("For altered bits of chromosome, should return false since there exist more ones continously than MaxOnes");
+		System.out.println(tester.maxFit(a,5));
+		for(int i =0;i<100;i++)
+		{
+			bits.set(i,0);
+		}
+		Chromosome maxFit = new Chromosome(bits);
+		
+		System.out.println("Creating a condition where there esxits no ones, this should help understand when MaxFit returns true");
+	
+		System.out.println(tester.maxFit(maxFit,5));
+		System.out.println();
+		System.out.println();
+		
+//		//Testing Evolutionary Loop
+//		tester.evoLoop(5.0, 1,20);
+//		for(int i =0;i<20;i++)
+//		{
+//			Chromosome temp = tester.chromes.get(i);
+//			for(int j =  0;j<temp.bits.size();i++)
+//			{
+//				System.out.print(temp.bits.get(i));
+//			}
+//		}
 	}
 }
