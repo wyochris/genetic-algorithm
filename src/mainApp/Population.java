@@ -307,7 +307,7 @@ public class Population {
 		double[] rankProb = new double[popsize];
 		for(int i =0;i<chromes.size();i++)
 		{
-			rankProb[i] = 1/totalOnes*(2*a*fitFunc(chromes.get(i)));
+			 rankProb[i] = 1/totalOnes*(2*a*fitFunc(chromes.get(i)));
 		}
 		
 		for(int c = 0; c<chromes.size();c++)

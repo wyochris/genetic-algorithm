@@ -23,7 +23,7 @@ public class Chromosome implements Comparable<Chromosome>{
 	}
 	
 	public int getOnes() {
-		return ones;
+		return ones; 
 	}
 	
 	public int compareTo(Chromosome other) {
