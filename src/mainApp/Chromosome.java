@@ -61,7 +61,7 @@ public class Chromosome implements Comparable<Chromosome>{
 		for(int i = 49; i < 50; i++) {
 			copy.bits.set(i, copy.bits.get(i - 49));
 		}
-		copy.mutate(90.0);
+		copy.mutate(chance)
 //		System.out.println(this.bits);
 //		System.out.println(copy.bits);
 		return copy;
