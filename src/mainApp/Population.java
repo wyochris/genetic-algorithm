@@ -1,6 +1,9 @@
 package mainApp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -23,7 +26,7 @@ public class Population {
 	private ArrayList<Chromosome> chromes = new ArrayList<Chromosome>();
 	private int popSize;
 	private Double chance;
-	int[] ones = new int[chromes.size()];
+	int[] ones;
 
 	/**
 	 * ensures: Make popSize generations of popSize chromosomes, with alleleSize alleles
@@ -57,6 +60,21 @@ public class Population {
 		 }
 		 
 		 gens.add(gen);
+		 printHelp(popSize);
+	}
+	
+	public void printHelp(int popSize)
+	{
+		for(int i =0;i<popSize;i++)
+		{
+			Chromosome temp = chromes.get(i);
+			for(int j =  0;j<temp.bits.size();j++)
+			{
+				System.out.print(temp.bits.get(j));
+			}
+			System.out.println();
+		}
+		System.out.println();System.out.println();System.out.println();
 	}
 	
 	public ArrayList<Generation> getGens(){
@@ -118,26 +136,16 @@ public class Population {
 	 * Checks for 1 bits and swaps the respective chromosome.
 	 * 		- Chris (Reviewer)
 	 */
-	public void bubbleSort() {
-		Chromosome temp;
-		int tempInt;
-		boolean isSorted=false;
-		while(!isSorted) {
-			isSorted=true;
-			for(int i =0;i<ones.length-1;i++) {
-				if(ones[i]>ones[i+1]) {
-					tempInt = ones[i];
-					ones[i]=ones[i+1];
-					ones[i+1]=tempInt;
-					
-					temp=chromes.get(i);
-					chromes.remove(i);
-					chromes.add(i,chromes.get(i+1));
-					chromes.remove(i+1);
-					chromes.add(i+1,temp);
-				}
-			}
-			
+	public void bubbleSort() 
+	{
+		for(int i=0;i<chromes.size();i++) {
+			chromes.get(i).ones = ones[i];
+		}
+		
+		chromes.sort(Comparator.comparingInt(Chromosome::getOnes));
+		Collections.reverse(chromes);
+		for(int i=0;i<chromes.size();i++) {
+			ones[i] = chromes.get(i).ones;
 		}
 	}
 	
@@ -150,17 +158,17 @@ public class Population {
 		createOne(popsize);
 		bubbleSort();
 		//Passing top 50
-		for(int i =0;i<50;i++) {
+		for(int i =0;i<popsize/2;i++) {
 			chromes.get(i).mutate(chance);
 			nextGen[i] = chromes.get(i);
-			if(eliteNum!=0)
+			if(eliteNum>i)
 			{
-				nextGen[i+50] = chromes.get(i).copyAndMutate((double) 0);
-				eliteNum--;
+				nextGen[i+popsize/2] = chromes.get(i).copyAndMutate((double) 0);
+				
 			}
 			else
 			{
-				nextGen[i+50] = chromes.get(i).copyAndMutate(chance);
+				nextGen[i+popsize/2] = chromes.get(i).copyAndMutate(chance);
 			}
 		}
 	}
@@ -172,9 +180,12 @@ public class Population {
 	 * @param generation
 	 */
 	public void evoLoop(double chance, int generation,int popSize) {
-		
+
+		chromes.clear();
 		for(int i =1;i<=generation;i++) {
 			generateRandom(popSize);
+			int temp[] = new int[popSize];
+			ones = temp;
 			nextGen = new Chromosome[chromes.size()];
 			evoLoopHelper(chance,popSize);
 			for(int j =0;i<chromes.size();i++)
@@ -259,17 +270,15 @@ public class Population {
 		double[] wheel = new double[chromes.size()];
 		for(int i =0;i<chromes.size();i++)
 		{
-			wheel[i] = 100*fitFunc(chromes.get(i))/totalOnes;
+			wheel[i] = 100.0*fitFunc(chromes.get(i))/totalOnes;
 		}
 		
 		Random rnd = new Random();
-		rnd.setSeed(0);
+		//rnd.setSeed(0);
 		double a = rnd.nextDouble(100);
-
-		
 		for(int c = 0; c<chromes.size();c++)
 		{
-			if(wheel[c]>=a)
+			if(wheel[c]<=a)
 			{
 				a = a-wheel[c];
 			}
@@ -278,7 +287,49 @@ public class Population {
 				return chromes.get(c);
 			}
 		}
+
 		return chromes.get(0);
+	}
+	
+	public Chromosome rankSelection(int popsize)
+	{
+		bubbleSort();
+		Random rnd = new Random();
+		int totalOnes = 0;
+		
+		for(int i =0;i<chromes.size();i++)
+		{
+			totalOnes+=fitFunc(chromes.get(i));
+		}
+		
+		double a = rnd.nextInt(popsize);
+		
+		double[] rankProb = new double[popsize];
+		for(int i =0;i<chromes.size();i++)
+		{
+			rankProb[i] = 1/totalOnes*(2*a*fitFunc(chromes.get(i)));
+		}
+		
+		for(int c = 0; c<chromes.size();c++)
+		{
+			if(rankProb[c]<=a)
+			{
+				a = a-rankProb[c];
+			}
+			else
+			{
+				return chromes.get(c);
+			}
+		}
+
+		return chromes.get(2);
+	}
+	
+	public Chromosome BogoSelection(int popsize)
+	{
+		Random rnd = new Random();
+		int a = rnd.nextInt(popsize);
+		return chromes.get(a);
 	}
 	
 	public void elitism(double elitism)
@@ -286,6 +337,7 @@ public class Population {
 		eliteNum = elitism;
 	}
 	
+
 	public static void main(String [] args)
 	{
 		Population tester = new Population();
@@ -311,20 +363,7 @@ public class Population {
 		System.out.println(tester.fitFunc(a));
 		System.out.println();
 		
-		//Now testing Smiley Fitness
-		/*
-		int arr[]= new int[12];
-		arr[0] = 22;
-		arr[1] = 27;
-		arr[2] = 71;
-		arr[3] = 78;
-		int k = 4;
-		for(int i =81;i<=88;i++)
-		{
-			arr[k] = i;
-			k++;
-		}
-		*/
+		
 		
 		ArrayList<Integer> smileyBits = new ArrayList<Integer>();
 		
@@ -378,15 +417,72 @@ public class Population {
 		System.out.println();
 		System.out.println();
 		
-//		//Testing Evolutionary Loop
-//		tester.evoLoop(5.0, 1,20);
-//		for(int i =0;i<20;i++)
-//		{
-//			Chromosome temp = tester.chromes.get(i);
-//			for(int j =  0;j<temp.bits.size();i++)
-//			{
-//				System.out.print(temp.bits.get(i));
-//			}
-//		}
+		System.out.println("Testing Evolutionary Loop");
+		//Testing Evolutionary Loop
+		tester.evoLoop(50, 1,20);
+		for(int i =0;i<20;i++)
+		{
+			Chromosome temp = tester.chromes.get(i);
+			for(int j =  0;j<temp.bits.size();j++)
+			{
+				System.out.print(temp.bits.get(j));
+			}
+			System.out.println();
+		}
+		
+		System.out.println("Evolutionary Loop succeeds");
+		
+		System.out.println();
+		System.out.println();
+		
+		System.out.println("Testing Evolutionary Loop with elitism");
+		
+		tester.elitism(10);
+		tester.evoLoop(50, 1,20);
+		for(int i =0;i<20;i++)
+		{
+			Chromosome temp = tester.chromes.get(i);
+			for(int j =  0;j<temp.bits.size();j++)
+			{
+				System.out.print(temp.bits.get(j));
+			}
+			System.out.println();
+		}
+		System.out.println("Evolutionary Loop with elitism succeeds");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		
+		
+		//Testing Roulette Selection
+		System.out.println(tester.rouletteSelection());
+		System.out.println(tester.rouletteSelection());
+		System.out.println(tester.rouletteSelection());
+		System.out.println(tester.rouletteSelection());
+		System.out.println(tester.rouletteSelection());
+		System.out.println(tester.rouletteSelection());
+		System.out.println(tester.rouletteSelection());
+		
+		System.out.println();
+		System.out.println();
+		
+		
+		//Testing Bogo Selection
+		System.out.println(tester.BogoSelection(20));
+		System.out.println(tester.BogoSelection(20));
+		System.out.println(tester.BogoSelection(20));
+		System.out.println(tester.BogoSelection(20));
+		System.out.println(tester.BogoSelection(20));
+		
+		System.out.println();
+		System.out.println();
+		
+		//Testing Rank Selection
+		System.out.println(tester.rankSelection(20));
+		System.out.println(tester.rankSelection(20));
+		System.out.println(tester.rankSelection(20));
+		System.out.println(tester.rankSelection(20));
+		System.out.println(tester.rankSelection(20));	
 	}
 }

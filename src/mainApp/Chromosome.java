@@ -7,10 +7,11 @@ package mainApp;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Chromosome {
+public class Chromosome implements Comparable<Chromosome>{
 
 	public ArrayList<Integer> bits;
 	private	Random rand = new Random();
+	int ones;
 
 
 	public Chromosome(ArrayList<Integer> chromeBits) {
@@ -19,6 +20,14 @@ public class Chromosome {
 	}
 	
 	public Chromosome() {
+	}
+	
+	public int getOnes() {
+		return ones;
+	}
+	
+	public int compareTo(Chromosome other) {
+		return Integer.compare(ones, other.ones);
 	}
 
 	// This method mutates the chromosome i.e flips 0s and 1s depedning on a user input mutation rate Double Chance
