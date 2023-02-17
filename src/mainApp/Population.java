@@ -36,11 +36,12 @@ public class Population {
 		 Random rnd = new Random();
 		 rnd.setSeed(0);
 		 
-		 this.gen = new Generation(0);
+//		 this.gen = new Generation(0);
 
  
 		 for(int k = 0; k < popSize; k++) {
 			 ArrayList<Integer> bits = new ArrayList<Integer>();
+			 this.gen = new Generation(k);
 
 			 for(int j = 0; j < alleleSize; j++ ) {
 				 bits.add(rnd.nextInt(0, 2));
@@ -49,6 +50,7 @@ public class Population {
 			 Chromosome chrome = new Chromosome(bits);
 //			 System.out.println("made a chromosome!");
 			 gen.add(chrome);
+
 		 }
 		 
 		 gens.add(gen);
@@ -64,8 +66,6 @@ public class Population {
 			Chromosome newGenChrome = this.gen.getChromes().get(k).copyAndMutate(chance);
 			gen.add(newGenChrome);
 		}
-		System.out.println("made a gen!");
-
 		gens.add(gen);
 	}
 	/**

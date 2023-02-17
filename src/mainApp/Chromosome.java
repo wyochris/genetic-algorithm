@@ -49,7 +49,10 @@ public class Chromosome {
 		for(int i = 0; i < this.bits.size(); i++) {
 			copy.bits.add(this.bits.get(i));
 		}
-		copy.mutate(20.0);
+		for(int i = 49; i < 50; i++) {
+			copy.bits.set(i, copy.bits.get(i - 49));
+		}
+		copy.mutate(90.0);
 //		System.out.println(this.bits);
 //		System.out.println(copy.bits);
 		return copy;
