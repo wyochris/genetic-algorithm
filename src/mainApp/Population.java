@@ -60,22 +60,22 @@ public class Population {
 		 }
 		 
 		 gens.add(gen);
-		 printHelp(popSize);
+//		 printHelp(popSize);
 	}
 	
-	public void printHelp(int popSize)
-	{
-		for(int i =0;i<popSize;i++)
-		{
-			Chromosome temp = chromes.get(i);
-			for(int j =  0;j<temp.bits.size();j++)
-			{
-				System.out.print(temp.bits.get(j));
-			}
-			System.out.println();
-		}
-		System.out.println();System.out.println();System.out.println();
-	}
+//	public void printHelp(int popSize)
+//	{
+//		for(int i =0;i<popSize;i++)
+//		{
+//			Chromosome temp = chromes.get(i);
+//			for(int j =  0;j<temp.bits.size();j++)
+//			{
+//				System.out.print(temp.bits.get(j));
+//			}
+//			System.out.println();
+//		}
+//		System.out.println();System.out.println();System.out.println();
+//	}
 	
 	public ArrayList<Generation> getGens(){
 		return this.gens;
