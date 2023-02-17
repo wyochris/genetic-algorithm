@@ -123,7 +123,8 @@ public class Population {
 	 * ensures: the top 50 is mutated in passed into the nextGeneration
 	 * @param chance, passed in by GUI or default 1
 	 */
-	public void evoLoopHelper(double chance) {
+	public void evoLoopHelper(double chance) 
+	{
 		createOne();
 		bubbleSort();
 		//Passing top 50
@@ -272,5 +273,4 @@ public class Population {
 	{
 		eliteNum = elitism;
 	}
-	
 }
