@@ -53,7 +53,7 @@ public class FileLoader {
 //	}
 
 	
-	private ArrayList<Integer> fileToArray(File file) throws FileNotFoundException{
+	ArrayList<Integer> fileToArray(File file) throws FileNotFoundException{
 		// TODO make file to array
 		// if something is not MAX_SIZE or MIN_SIZE catch
 		Scanner s = new Scanner(file);

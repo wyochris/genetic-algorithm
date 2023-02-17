@@ -11,20 +11,29 @@ package mainApp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
+import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class ChromosomeViewer extends JComponent {
@@ -129,6 +138,31 @@ public class ChromosomeViewer extends JComponent {
 		loadFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+//				JFrame.setDefaultLookAndFeelDecorated(true);
+		        JFrame frame = new JFrame("JComboBox Test");
+		        frame.setLayout(new FlowLayout());
+		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        JButton button = new JButton("Select File");
+		        button.addActionListener(new ActionListener() {
+
+					public void actionPerformed(ActionEvent e) {
+		        		JFileChooser fileChooser = new JFileChooser();
+		        		int returnValue = fileChooser.showOpenDialog(null);
+		        		if (returnValue == JFileChooser.APPROVE_OPTION) {
+		        			File selectedFile = fileChooser.getSelectedFile();
+		        			FileLoader fileL = new FileLoader();
+		        			try {
+								newChrome.bits = fileL.fileToArray(selectedFile);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+		        		}
+		        	}
+		        });
+		        frame.add(button);
+		        frame.pack();
+		        frame.setVisible(true);    
 			}
 		});
 		
@@ -138,7 +172,31 @@ public class ChromosomeViewer extends JComponent {
 		saveFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		
+				JFrame frame = new JFrame();
+				JFileChooser fileChooser = new JFileChooser();
+				JTextArea textArea = new JTextArea(24, 80);
+				File file;
+			    frame.add(new JScrollPane(textArea));
+			    int retval = fileChooser.showSaveDialog(saveFile);
+			    if (retval == JFileChooser.APPROVE_OPTION) {
+			    	file = fileChooser.getSelectedFile();
+			    	if (file == null) {
+			    		return;
+			    	}
+			    	if (!file.getName().toLowerCase().endsWith(".txt")) {
+			        	file = new File(file.getParentFile(), file.getName() + ".txt");
+			    	}
+			    	try {
+			    		textArea.write(new OutputStreamWriter(new FileOutputStream(file),
+			    				"utf-8"));
+			    		Desktop.getDesktop().open(file);
+			    	} 
+			    	catch (Exception e1) {
+			    		e1.printStackTrace();
+			    	}	
+			    }
+
+				frame.setVisible(true);
 			}
 		});
 		
