@@ -45,11 +45,7 @@ public class ChromosomeViewer extends JComponent {
 		cViewerDriver(newChrome);
 	}
 
-//	public ChromosomeViewer(JFrame frame) {
-//		// TODO Auto-generated constructor stub
-//		Chromosome newChrome = new Chromosome(chromeBits);
-//		cViewerDriver(newChrome, frame);
-//	}
+
 
 	/* This method creates the GUI for viewing a chromosome*/
 	

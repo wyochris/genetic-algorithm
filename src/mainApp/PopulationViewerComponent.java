@@ -40,12 +40,6 @@ public class PopulationViewerComponent extends JComponent {
 	private String selectionType;
 
 	
-	//add to the logs
-//	public void addEntry(int heathy, int sick, int recovered ) {
-//		this.bestFit.add(heathy);
-//		this.avgFit.add(sick);
-//		this.worstFit.add(recovered);
-//	}
 	
 	//reset the logs
 	public void reset() {
@@ -60,9 +54,7 @@ public class PopulationViewerComponent extends JComponent {
 		Graphics2D g2 = (Graphics2D)g;
 		System.out.println("hi im painting");
 		
-		//Draw box for reporting numbers
 		g2.drawRect(0, 0, SIDE_OFFSET-1, this.getHeight() );
-		//Fill region for data to be shown
 		g2.fillRect(SIDE_OFFSET, 0, this.getWidth()-SIDE_OFFSET, this.getHeight() );
 		
 		if ( bestFit.size() > 0) {
@@ -101,11 +93,7 @@ public class PopulationViewerComponent extends JComponent {
 			g2.setColor(Color.BLACK);
 			g2.drawLine(SIDE_OFFSET + i*LINE_WIDTH, this.bestYP,
 					SIDE_OFFSET + i*LINE_WIDTH + LINE_WIDTH, bestPer);
-//			System.out.println("");
-//			System.out.println(bestYP + " " + bestPer);
-//			System.out.println(avgYP + " " + avgPer);
-//			System.out.println(worstYP + " " + worstPer);
-//			System.out.println("");
+
 
 
 			
@@ -141,9 +129,7 @@ public class PopulationViewerComponent extends JComponent {
 		Population pop = new Population();
 		pop.generateRandom(popSize);
 		this.pop = pop;
-//		for(Generation t: pop.gens ) {
-//			updateGen(t);
-//		}
+
 		
 	}
 	public void updateGen(Generation currentGen) {
@@ -180,14 +166,12 @@ public class PopulationViewerComponent extends JComponent {
 	}
 
 	public void update() {
-		// TODO Auto-generated method stub
 		System.out.println("updating");
 		this.pop.nextGen(this.chance);
 		updateGen(this.pop.gens.get(pop.gens.size() - 1));
 	}
 
 	public void clear() {
-		// TODO Auto-generated method stub
 		this.bestFit.clear();
 		this.avgFit.clear();
 		this.worstFit.clear();

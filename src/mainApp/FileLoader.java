@@ -20,8 +20,7 @@ public class FileLoader {
 	FileLoaderViewer viewer = new FileLoaderViewer(background);
 	File file;
 	
-	public FileLoader() {
-		// TODO Auto-generated constructor stub
+	public FileLoader() {		// TODO Auto-generated constructor stub
 	}
 	
 	public ArrayList<Integer> init() {
@@ -39,18 +38,6 @@ public class FileLoader {
 	public ArrayList<Integer> returnBits() {
 		return null;
 	}
-
-//	public ArrayList<Integer> loadFile() {
-//		try {
-//			this.file = this.viewer.returnFile();
-//			return fileToArray(this.file);
-//
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
 
 	
 	ArrayList<Integer> fileToArray(File file) throws FileNotFoundException{

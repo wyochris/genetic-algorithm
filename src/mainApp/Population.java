@@ -38,8 +38,6 @@ public class Population {
 		this.popSize = popSize;
 		 Random rnd = new Random();
 		 rnd.setSeed(0);
-		 
-//		 this.gen = new Generation(0);
 
  
 		 for(int k = 0; k < popSize; k++)
@@ -50,10 +48,8 @@ public class Population {
 			 for(int j = 0; j < alleleSize; j++ ) 
 			 {
 				 bits.add(rnd.nextInt(0, 2));
-//				 System.out.println(bits.get(j));
 			 }
 			 Chromosome chrome = new Chromosome(bits);
-//			 System.out.println("made a chromosome!");
 			 gen.add(chrome);
 			 chromes.add(chrome);
 
@@ -93,21 +89,21 @@ public class Population {
 	 * 
 	 * @return fitarray of a generation
 	 */
-//	public ArrayList<Integer> getFitArray(Generation gen){
-//		ArrayList<Integer> fitArray = new ArrayList<Integer>();
-//		for(int i = 0; i < 100; i++) {
-//			fitArray.add(gen.getChromes().get(i).getBasicFit());
-//			System.out.println(fitArray.get(i));
-//		}
-//		return fitArray;
-//	}
+	public ArrayList<Integer> getFitArray(Generation gen){
+		ArrayList<Integer> fitArray = new ArrayList<Integer>();
+		for(int i = 0; i < 100; i++) {
+			fitArray.add(gen.getChromes().get(i).getBasicFit());
+			System.out.println(fitArray.get(i));
+		}
+		return fitArray;
+	}
 		
-//	/**
-//	 * ensures: the number of 1's in a chromosome's alleles is counted
-//	 * @param Chromosome c to be evaluated
-//	 * @return count, the number of 1's
-//	 * 
-//	 */
+	/**
+	 * ensures: the number of 1's in a chromosome's alleles is counted
+	 * @param Chromosome c to be evaluated
+	 * @return count, the number of 1's
+	 * 
+	 */
 	public int fitFunc(Chromosome c)
 	{
 		int count = 0;

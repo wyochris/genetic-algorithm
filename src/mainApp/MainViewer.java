@@ -48,7 +48,6 @@ public class MainViewer{
 		
 		JFrame frame = new JFrame();
 		frame.setTitle(frameTitle);
-//		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setLocation(frameXLoc, frameYLoc);
 		frame.setSize(400, 400);
 		frame.setLocation(frameXLoc, frameYLoc);
@@ -70,7 +69,6 @@ public class MainViewer{
 				ArrayList<Integer> chromeBits = chromeFile.init();
 				Chromosome newChrome = new Chromosome(chromeBits);
 				ChromosomeViewer cViewer = new ChromosomeViewer(newChrome);
-//				ChromosomeViewer cViewer = new ChromosomeViewer(frame);
 
 				
 			}
@@ -89,7 +87,6 @@ public class MainViewer{
 	
 
 		
-//		frame.pack();
 		frame.add(controlPanel, BorderLayout.NORTH );
 		frame.setVisible(true);
 		

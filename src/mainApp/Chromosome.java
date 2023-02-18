@@ -15,7 +15,6 @@ public class Chromosome implements Comparable<Chromosome>{
 
 
 	public Chromosome(ArrayList<Integer> chromeBits) {
-		// TODO Auto-generated constructor stub
 		this.bits = chromeBits;
 	}
 	
@@ -41,14 +40,11 @@ public class Chromosome implements Comparable<Chromosome>{
 					bits.set(i, 1);
 				}
 			}
-//			System.out.print(bits.get(i));
-		}
-//		System.out.println("");
+			}
 	}
 	
 	//Return the number of bit s i.e 0s and 1s in the Chromosome
 	public int getChromeSize() {
-//		System.out.println("hello " + bits.size());
 		return bits.size();
 	}
 	
@@ -58,12 +54,8 @@ public class Chromosome implements Comparable<Chromosome>{
 		for(int i = 0; i < this.bits.size(); i++) {
 			copy.bits.add(this.bits.get(i));
 		}
-//		for(int i = 49; i < 50; i++) {
-//			copy.bits.set(i, copy.bits.get(i - 49));
-//		}
 		copy.mutate(chance);
-//		System.out.println(this.bits);
-//		System.out.println(copy.bits);
+
 		return copy;
 	}
 	
@@ -74,7 +66,6 @@ public class Chromosome implements Comparable<Chromosome>{
 				count++;
 			}
 		}
-//		System.out.println(count);
 		return count;
 	}
 }
