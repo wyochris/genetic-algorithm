@@ -114,9 +114,11 @@ public class PopulationViewer extends JComponent {
 			public void actionPerformed(ActionEvent e) {
 				if(start.getText() == "Start") {
 					Boolean isElitism = elitismBox.isSelected();
+					String selection = (String) addNumberSelector.getSelectedItem();
+					System.out.println(selection);
 					t.start();
 					popComp.start(Integer.parseInt(numGen.getText()), 
-							Integer.parseInt(numPop.getText()), Double.parseDouble(mutateRate.getText()), "Truncation", isElitism);
+							Integer.parseInt(numPop.getText()), Double.parseDouble(mutateRate.getText()), selection, isElitism);
 					System.out.println(isElitism);
 					start.setText("Stop");	
 				}

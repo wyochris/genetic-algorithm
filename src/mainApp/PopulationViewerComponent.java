@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-import sim.SimulationViewer;
+//import sim.SimulationViewer;
 
 public class PopulationViewerComponent extends JComponent {
 	
@@ -37,6 +37,7 @@ public class PopulationViewerComponent extends JComponent {
 	private int bestYP = this.getHeight();
 	private int worstYP = this.getHeight();
 	private int avgYP = this.getHeight();
+	private String selectionType;
 
 	
 	//add to the logs
@@ -66,19 +67,19 @@ public class PopulationViewerComponent extends JComponent {
 		
 		if ( bestFit.size() > 0) {
 			g2.setColor(Color.BLACK);
-			g2.drawString("Best Fitness:", SIDE_OFFSET/10, this.getHeight() * 8 * bestFit.get(0) / this.getHeight() );
+			g2.drawString("Best Fitness:", SIDE_OFFSET/10, this.getHeight() * 8 * bestFit.get(bestFit.size() - 1) / this.getHeight() );
 			
 			g2.setColor(Color.BLUE);
-			g2.drawString("Avg Fitness:", SIDE_OFFSET/10, (int) (this.getHeight() * 5 * avgFit.get(0) / this.getHeight()));
+			g2.drawString("Avg Fitness:", SIDE_OFFSET/10, (int) (this.getHeight() * 5 * avgFit.get(avgFit.size() - 1) / this.getHeight()));
 			
 			g2.setColor(Color.RED);
-			g2.drawString("Worst Fitness:", SIDE_OFFSET/10, this.getHeight() * 3 * worstFit.get(0) / this.getHeight() );
+			g2.drawString("Worst Fitness:", SIDE_OFFSET/10, this.getHeight() * 3 * worstFit.get(worstFit.size() - 1) / this.getHeight() );
 			
 			System.out.println("hello 1");
 			
-			this.bestYP = this.getHeight() * 8 * bestFit.get(0) / this.getHeight();
-			this.avgYP = (int) (this.getHeight() * 5 * avgFit.get(0) / this.getHeight());
-			this.worstYP = this.getHeight() * 3 * worstFit.get(0) / this.getHeight();
+			this.bestYP = this.getHeight() * 8 * bestFit.get(bestFit.size() - 1) / this.getHeight();
+			this.avgYP = (int) (this.getHeight() * 5 * avgFit.get(bestFit.size() - 1) / this.getHeight());
+			this.worstYP = this.getHeight() * 3 * worstFit.get(bestFit.size() - 1) / this.getHeight();
 
 
 					
@@ -91,9 +92,9 @@ public class PopulationViewerComponent extends JComponent {
 			double total = bestFit.size();
 			
 			//make it percentageBased
-			int bestPer = (int)(this.getHeight() * 8 * bestFit.get(i) / this.getHeight());
-			int avgPer = (int)(this.getHeight() * 5 * avgFit.get(i)) / this.getHeight();
-			int worstPer = (int)(this.getHeight() * 3 * worstFit.get(i)) / this.getHeight();
+			int bestPer = (int)(this.getHeight() * 8 * bestFit.get(bestFit.size() - 1) / this.getHeight());
+			int avgPer = (int)(this.getHeight() * 5 * avgFit.get(bestFit.size() - 1)) / this.getHeight();
+			int worstPer = (int)(this.getHeight() * 3 * worstFit.get(bestFit.size() - 1)) / this.getHeight();
 			
 			//offset slightly to get lines to show up
 
@@ -130,8 +131,9 @@ public class PopulationViewerComponent extends JComponent {
 		this.setPreferredSize(new Dimension(800, STATS_HEIGHT) );
 	}
 
-	public void start(int numGen, int popSize, double mRate, String selecionType, Boolean isElitism) {
+	public void start(int numGen, int popSize, double mRate, String selection, Boolean isElitism) {
 		System.out.println(isElitism);
+		this.selectionType = selection;
 		this.numGen = numGen;
 		this.curGenNum = 0;
 		this.chance = mRate;
@@ -179,9 +181,9 @@ public class PopulationViewerComponent extends JComponent {
 
 	public void update() {
 		// TODO Auto-generated method stub
+		System.out.println("updating");
 		this.pop.nextGen(this.chance);
-		updateGen(this.pop.gens.get(this.curGenNum));
-		this.curGenNum++;
+		updateGen(this.pop.gens.get(pop.gens.size() - 1));
 	}
 
 	public void clear() {

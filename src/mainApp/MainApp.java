@@ -23,6 +23,7 @@ public class MainApp extends JComponent {
 
 	private void runApp() {
 		System.out.println("Write your cool arcade game here!");
+		System.out.println("Ethan test commit");
 		MainViewer mainV = new MainViewer();
 //		Random rand = new Random();
 //		System.out.println(rand.nextInt(0,2));
@@ -38,5 +39,6 @@ public class MainApp extends JComponent {
 	public static void main(String[] args) {
 		MainApp mainApp = new MainApp();
 		mainApp.runApp();		
+		//test commit https://github.com/rhit-csse220/csse220-winter-2022-23-final-project-w23_r_201.git
 	} // main
 }
