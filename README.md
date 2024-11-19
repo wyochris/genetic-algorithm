@@ -1,6 +1,6 @@
 # Genetic Algorithm
 
-This is a Java-based application that simulates evolutionary processes to solve optimization problems. It uses genetic algorithms to explore solutions by generating populations, selecting the fittest candidates, and applying genetic operations such as mutation and crossover.
+The Genetic Algorithm Research Project is a Java-based application that simulates evolutionary processes to solve optimization problems. It uses genetic algorithms to explore solutions by generating populations, selecting the fittest candidates, and applying genetic operations such as mutation and crossover.
 
 ---
 
